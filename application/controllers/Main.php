@@ -33,6 +33,16 @@ class Main extends CI_Controller {
 	}
 
 
+	public function songs(){
+
+                $this->load->model('data');
+
+
+		$data['songs'] = $this->data->song_list_db();
+		$this->load->view('template/header');
+
+		#$this->load->view('song_list', $data);
+	}
 
 	public function update(){
 
@@ -43,6 +53,12 @@ class Main extends CI_Controller {
 
 	}
 
+	public function update_songs(){
+
+		$this->load->model('data');
+
+		$this->data->song_list_generate();
+	}
 	public function scores($userid, $diff='wild'){
 
 		/**
