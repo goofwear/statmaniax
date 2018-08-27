@@ -23,9 +23,24 @@ class Main extends CI_Controller {
 		$this->load->model('data');
 
 
-		$this->output->cache(20);
-		$data['users'] = $this->data->user_list();
+		#$this->output->cache(20);
+		#$data['users'] = $this->data->user_list();
+
+
+		// Pull from DB isntead
+		$data['users'] = $this->data0->user_list_db();
 		$this->load->view("user_list", $data);
+	}
+
+
+
+	public function update(){
+
+                $this->load->model('data');
+                $data['users'] = $this->data->user_list();
+
+		$this->data->user_update($data['users']);
+
 	}
 
 	public function scores($userid, $diff='wild'){

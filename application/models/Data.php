@@ -3,8 +3,46 @@ class Data extends CI_Model {
     function __construct() {
         // Call the Model constructor
         parent::__construct();
+        $this->load->database();
+
     }
 
+
+
+
+
+    function user_update($user_list){
+	foreach ($user_list as $user){
+
+		if(isset($user['picture_path'])){
+
+			$id = $this->db->escape($this->parse_picture_path($user['picture_path']));
+			$first = $this->db->escape($user['first_name']);
+			$last = $this->db->escape($user['last_name']);
+			$username = $this->db->escape($user['username']);
+			$score = $this->db->escape($user['total_score']);
+			$picture_path = $this->db->escape($user['picture_path']);
+			$country = $this->db->escape($user['country']);
+
+			$sql = "INSERT into user (id, username, first, last, total_score, picture_path, country)
+				VALUES ($id,$username,$first,$last,$score,$picture_path,$country)
+				ON DUPLICATE KEY UPDATE first=$first, last=$last, total_score=$score, picture_path=$picture_path, country=$country";
+			$this->db->query($sql);
+		}
+	}
+
+
+    }
+
+
+
+    function user_list_db(){
+
+	$sql = "SELECT * from user";
+	$query = $this->db->query($sql);
+	return $query->result_array();
+
+    }
 
 
     function user_list() {
