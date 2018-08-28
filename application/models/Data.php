@@ -7,10 +7,6 @@ class Data extends CI_Model {
 
     }
 
-
-
-
-
     function user_update($user_list){
 	foreach ($user_list as $user){
 
@@ -93,7 +89,17 @@ class Data extends CI_Model {
         return $query->result_array();
     }
 
-    function user_list() {
+
+    function user_info_db($userid){
+	if(is_numeric($userid)){
+		$this->db->escape($userid);
+		$sql = "SELECT * from user where id = $userid";
+		$query = $this->db->query($sql);
+		return $query->row_array();
+	}
+    }
+
+    function user_list_api() {
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/user');
         $json = json_decode($data, true);
@@ -115,7 +121,7 @@ class Data extends CI_Model {
     }
 
 
-    function user_info($userid) {
+    function user_info_api($userid) {
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/user');
         $json = json_decode($data, true);
@@ -144,23 +150,12 @@ class Data extends CI_Model {
     }
 
 
-    function parse_picture_path($picture_path){
-	$parts = explode('/', $picture_path);
-	$image = $parts[2];
-	$parts = explode('_', $image);
-	return $parts[0];
-
-    }
-
-    function user_score_history($userid){
+    function user_score_history_api($userid){
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/gamer/history/'.$userid);
         $json = json_decode($data, true);
 
         $num_pages = $json['scores']['last_page'];
         $current_page = $json['scores']['current_page'];
-
-
-        print_r($json['scores']);
 
         $score_list = $json['scores']['data'];
         while($current_page < $num_pages){
@@ -171,6 +166,46 @@ class Data extends CI_Model {
         }
 
         return $score_list;
+
+    }
+
+
+    function user_score_history_update($data){
+
+	foreach($data as $score){
+
+
+		$id = $this->db->escape($score['id']);
+                $gamer_id = $this->db->escape($score['gamer_id']);
+                $song_chart_id = $this->db->escape($score['song_chart_id']);
+                $score_points = $this->db->escape($score['score']);
+                $machine_serial = $this->db->escape($score['machine_serial']);
+                $grade = $this->db->escape($score['grade']);
+                $calories = $this->db->escape($score['calories']);
+                $perfect1 = $this->db->escape($score['perfect1']);
+                $perfect2 = $this->db->escape($score['perfect2']);
+                $early = $this->db->escape($score['early']);
+                $late = $this->db->escape($score['late']);
+                $misses = $this->db->escape($score['misses']);
+                $flags = $this->db->escape($score['flags']);
+                $green = $this->db->escape($score['green']);
+                $yellow = $this->db->escape($score['yellow']);
+                $red = $this->db->escape($score['red']);
+                $created_at = $this->db->escape($score['created_at']);
+                $title = $this->db->escape($score['title']);
+                $artist = $this->db->escape($score['artist']);
+                $cover_path = $this->db->escape($score['cover_path']);
+                $name = $this->db->escape($score['name']);
+                $uuid = $this->db->escape($score['uuid']);
+
+		$sql = "INSERT into score (id,gamer_id,song_chart_id,score,machine_serial,grade,calories,perfect1,perfect2,early,late,misses,flags,green,yellow,red,created_at,title,artist,cover_path,name,uuid)
+			VALUES($id,$gamer_id,$song_chart_id,$score_points,$machine_serial,$grade,$calories,$perfect1,$perfect2,$early,$late,$misses,$flags,$green,$yellow,$red,$created_at,$title,$artist,$cover_path,$name,$uuid)
+			ON DUPLICATE KEY UPDATE artist=$artist,title=$title,created_at=$created_at";
+		$this->db->query($sql);
+	}
+
+
+
 
     }
 
@@ -212,29 +247,7 @@ class Data extends CI_Model {
         $num_pages = $json['scores']['last_page'];
         $current_page = $json['scores']['current_page'];
 
-	switch($diff){
-		case "1":
-			$diff = "basic";
-			break;
-		case "2":
-			$diff = "easy";
-			break;
-		case "3":
-			$diff = "hard";
-			break;
-		case "4":
-			$diff = "wild";
-			break;
-		case "5":
-			$diff = "dual";
-			break;
-		case "6":
-			$diff = "full";
-			break;
-		case "default":
-			break;
-
-	}
+	$diff = $this->diff_convert($diff);
 
 
         $score_list = $json['scores']['data'];
@@ -268,36 +281,28 @@ class Data extends CI_Model {
     }
 
 
-    function leaderboard($diff){
+    function user_highscores_title_db($userid, $diff=4){
 
+        $diff = $this->diff_convert($diff);
 
+	$userid = $this->db->escape($userid);
+        $diff = $this->db->escape($diff);
 
-	$data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/song?&search=&difficulty_id='.$diff);
-        $json = json_decode($data, true);
-
-        $num_pages = $json['results']['last_page'];
-        $current_page = $json['results']['current_page'];
-
-
-        $score_list = $json['results']['data'];
+	$sql = "select * from score where gamer_id=$userid and name=$diff";
+	$query = $this->db->query($sql);
+	$scores = $query->result_array();
         $highscores = Array();
-        while($current_page <= $num_pages){
-		foreach($score_list as $score){
-                        $song_chart_id = $score['game_song_id'];
-			$highscores[$song_chart_id] = $score['top_scores'][0];
+	foreach ($scores as $score){
+		$song_title = $score['title'];
+ 		$song_artist = $score['artist'];
 
-		}
-		$next_page = $current_page+1;
-		$url = "https://data.stepmaniax.com/index.php/web/leaderboard/song?&search=&difficulty_id=".$diff."&page=".$next_page;
-                $data = file_get_contents($url);
-                $json = json_decode($data, true);
-        	$score_list = $json['results']['data'];
-                $current_page = $json['results']['current_page'];
-        }
-        return $highscores;
+		$highscores[$song_title.$song_artist] = $score;
+	}
 
+	return $highscores;
     }
-    function leaderboard_title($diff){
+
+    function leaderboard_title_api($diff){
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/song?&search=&difficulty_id='.$diff);
         $json = json_decode($data, true);
@@ -314,8 +319,6 @@ class Data extends CI_Model {
                         $song_title = $score['title'];
                         $song_artist = $score['artist'];
 			if (!empty($score['top_scores']))
-				#echo "<pre>";
-				#print_r($score['top_scores']);
                         	$highscores[$song_title.$song_artist] = $score['top_scores'][0];
 
                 }
@@ -329,5 +332,115 @@ class Data extends CI_Model {
         return $highscores;
 
     }
+
+    function leaderboard_title_db($diff){
+	$diff = $this->db->escape($diff);
+	$sql = "select l.id as id, l.score as score, u.id as user_id, u.username as username 
+		from leaderboard as l
+		left join user u 
+		on u.id=l.user_id
+		where diff=$diff";
+	#$sql = "select * from leaderboard where diff=$diff";
+	$query = $this->db->query($sql);
+
+	$leaderboard = $query->result_array();
+        $highscores = Array();
+	foreach($leaderboard as $score){
+		$key = $score['id'];
+		$highscores[$key] = $score;
+	}
+
+	return $highscores;
+
+    }
+
+    function leaderboard_update(){
+
+	for ( $diff=6; $diff>0; $diff--){
+
+		$highscores = $this->leaderboard_title_api($diff);
+
+		foreach($highscores as $key=>$score){
+                    if(isset($score['picture_path']))
+			$userid = $this->db->escape($this->parse_picture_path($score['picture_path']));
+		    else
+			$userid = NULL;
+
+			$userid = $this->db->escape($userid);
+			$diff = $this->db->escape($diff);
+			$key = $this->db->escape($key);
+			$score_points = $this->db->escape($score['score']);
+
+			$sql = "INSERT into leaderboard (id, user_id, score, diff) VALUES ($key, $userid, $score_points, $diff)
+				ON DUPLICATE KEY UPDATE user_id=$userid, score=$score_points, diff=$diff";
+			$this->db->query($sql);
+		}
+	}// end for diff
+    }
+
+
+    function parse_picture_path($picture_path){
+        $parts = explode('/', $picture_path);
+        $image = $parts[2];
+        $parts = explode('_', $image);
+        return $parts[0];
+
+    }
+
+    function diff_convert($diff){
+
+	if(is_numeric($diff)){
+	    switch($diff){
+                case "1":
+                        $diff = "basic";
+                        break;
+                case "2":
+                        $diff = "easy";
+                        break;
+                case "3":
+                        $diff = "hard";
+                        break;
+                case "4":
+                        $diff = "wild";
+                        break;
+                case "5":
+                        $diff = "dual";
+                        break;
+                case "6":
+                        $diff = "full";
+                        break;
+                case "default":
+                        break;
+            }
+	} else {
+	    switch($diff){
+                case "basic":
+                        $diff = "1";
+                        break;
+                case "easy":
+                        $diff = "2";
+                        break;
+                case "hard":
+                        $diff = "3";
+                        break;
+                case "wild":
+                        $diff = "4";
+                        break;
+                case "dual":
+                        $diff = "5";
+                        break;
+                case "full":
+                        $diff = "6";
+                        break;
+                case "default":
+                        break;
+
+            }
+
+	}
+
+	return $diff;
+
+     }
 
 }
