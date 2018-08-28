@@ -12,15 +12,13 @@ class Main extends CI_Controller {
 
 	}
 
-
-
-
 	public function index()
 	{
 
 		// Pull from DB isntead
 		$data['users'] = $this->data->user_list_db();
-		$this->load->view("user_list", $data);
+                $this->load->view('templates/header');
+		$this->load->view('user_list', $data);
 	}
 
 
@@ -30,44 +28,6 @@ class Main extends CI_Controller {
 		$this->load->view('template/header');
 
 		#$this->load->view('song_list', $data);
-	}
-
-	public function update_users(){
-
-                $data['users'] = $this->data->user_list_api();
-
-		$this->data->user_update($data['users']);
-
-	}
-
-
-	public function update_scores($userid){
-
-                $user_scores= $this->data->user_score_history_api($userid);
-		$this->data->user_score_history_update($user_scores);
-	}
-
-	public function update_songs(){
-
-
-		$this->data->song_list_generate();
-	}
-
-	public function update_leaderboard(){
-
-		$this->data->leaderboard_update();
-	}
-
-	public function update_all(){
-
-
-		$this->update_songs();
-		$this->update_users();
-		
-		$userlist = $this->data->user_list_db();
-		foreach ($userlist as $user){
-			$this->update_scores($user['id']);
-		};
 	}
 
 	public function scores($userid, $diff='wild'){
