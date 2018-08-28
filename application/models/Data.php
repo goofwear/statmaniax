@@ -76,8 +76,8 @@ class Data extends CI_Model {
 
     function user_list_db(){
 
-	$sql = "SELECT * from user order by total_score DESC";
-	$query = $this->db->query($sql);
+	$this->db->order_by('total_score', 'desc');
+	$query = $this->db->get('user');
 	return $query->result_array();
 
     }

@@ -19,6 +19,8 @@ class Main extends CI_Controller {
 		$data['users'] = $this->data->user_list_db();
                 $this->load->view('templates/header');
 		$this->load->view('user_list', $data);
+		$this->load->view('templates/footer');
+
 	}
 
 
@@ -26,6 +28,8 @@ class Main extends CI_Controller {
 
 		$data['songs'] = $this->data->song_list_db();
 		$this->load->view('template/header');
+		$this->load->view('templates/footer');
+
 
 		#$this->load->view('song_list', $data);
 	}
@@ -41,6 +45,7 @@ class Main extends CI_Controller {
 		
 		$this->load->view('templates/header');
 		$this->load->view("user_score", $data);
+		$this->load->view('templates/footer');
 
 	}
 

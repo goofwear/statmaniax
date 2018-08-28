@@ -16,10 +16,10 @@
 
 		<div class="userlist-user">
 			<div class="row">
-				<div class="col-md-2">
+				<div class="col-2">
 					<img src="https://data.stepmaniax.com/<?=$user['picture_path']?>" width="100">
 				</div>
-				<div class="col-md-9">
+				<div class="col-9">
 					<a href="scores/<?=$userid?>"><h2 class="smx-userlist-name"><?=$user['username']?></h2></a>
                         		<p class="smx-userlist-additional"><?=number_format($user['total_score'])?> Acc. Points</p>
 				</div>
