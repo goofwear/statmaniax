@@ -1,11 +1,18 @@
+<div class="smx-ui-title">
+    <h2 id="smx-title"><?=$user_info['username']?></h2>
+</div>
+ <div class="player-info">
+    <img src="https://data.stepmaniax.com/<?=$user_info['picture_path']?>" width="100%">
+</div>
+ <div class="container">
+     <div class="player-ui"></div>
+ </div>
+
+
+
 <main role="main" class="container">
 
 <div class="starter-template">
-
-<h2><?php echo $user_info['username']; ?></h2>
-<div>
-<img src="https://data.stepmaniax.com/<?php echo $user_info['picture_path']?>">
-</div>
 
 <table class="table" data-sorting="true">
 <thead>
