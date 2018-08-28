@@ -295,8 +295,12 @@ class Data extends CI_Model {
 	foreach ($scores as $score){
 		$song_title = $score['title'];
  		$song_artist = $score['artist'];
-
-		$highscores[$song_title.$song_artist] = $score;
+ 		if(isset($highscores[$song_title.$song_artist])){
+			if($highscores[$song_title.$song_artist]['score'] < $score['score'])
+				$highscores[$song_title.$song_artist] = $score;
+		} else {
+			$highscores[$song_title.$song_artist] = $score;
+		}
 	}
 
 	return $highscores;
