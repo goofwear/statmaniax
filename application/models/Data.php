@@ -506,4 +506,60 @@ class Data extends CI_Model {
 
      }
 
+    function gradetostars($stars)
+    {
+        $out = "";
+        if (is_numeric($stars)) {
+            switch ($stars) {
+                case 6:
+                    $out = "https://www.stepmaniax.com/img/grades/1.png";
+                    break;
+                case 5:
+                    $out = "https://www.stepmaniax.com/img/grades/2.png";
+                    break;
+                case 4:
+                    $out = "https://www.stepmaniax.com/img/grades/3.png";
+                    break;
+                case 3:
+                    $out = "https://www.stepmaniax.com/img/grades/4.png";
+                    break;
+                case 2:
+                    $out = "https://www.stepmaniax.com/img/grades/5.png";
+                    break;
+                case 1:
+                    $out = "https://www.stepmaniax.com/img/grades/6.png";
+                    break;
+                case 0:
+                    $out = "https://www.stepmaniax.com/img/grades/7.png";
+                    break;
+            }
+        } else {
+            switch ($stars) {
+                case "6":
+                    $out = "https://www.stepmaniax.com/img/grades/1.png";
+                    break;
+                case "5":
+                    $out = "https://www.stepmaniax.com/img/grades/2.png";
+                    break;
+                case "4":
+                    $out = "https://www.stepmaniax.com/img/grades/3.png";
+                    break;
+                case "3":
+                    $out = "https://www.stepmaniax.com/img/grades/4.png";
+                    break;
+                case "2":
+                    $out = "https://www.stepmaniax.com/img/grades/5.png";
+                    break;
+                case "1":
+                    $out = "https://www.stepmaniax.com/img/grades/6.png";
+                    break;
+                case "0":
+                    $out = "https://www.stepmaniax.com/img/grades/7.png";
+                    break;
+            }
+        }
+
+        return $out;
+    }
+
 }

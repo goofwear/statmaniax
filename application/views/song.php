@@ -32,36 +32,92 @@
             </table>
          </div>
         <div class="col-md-9">
-            <table class="table table-dark" data-sorting="true">
-                <thead>
-                <th>Player</th>
-                <th data-type="number">Score</th>
-                <th data-type="number">Grade</th>
-                <th data-type="date">Date</th>
-                </thead>
-                <tbody>
-                <?php
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Tip:</strong> Hover over your score to view detailed judgement information.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
-                foreach ($scores as $score) { ?>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="hiscores-tab" data-toggle="tab" href="#hiscores" role="tab"
+                       aria-controls="hiscores" aria-selected="true">Hi-Scores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab"
+                       aria-controls="history" aria-selected="false">History</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="hiscores" role="tabpanel" aria-labelledby="hiscores-tab">
+                    <table class="table table-dark" data-sorting="true" data-paging="true">
+                        <thead>
+                        <th>Player</th>
+                        <th data-type="number">Score</th>
+                        <th>Grade</th>
+                        <th data-type="date">Date</th>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($scores as $score) { ?>
 
-                    <tr>
-                        <td></td>
-                        <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+                            <tr>
+                                <td>
+                                    <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
+                                </td>
+                                <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
-                        <td><?= $score['grade'] ?></td>
-                        <td><?= $score['created_at'] ?></td>
-                    </tr>
+                                <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
+                                <td><?= $score['created_at'] ?></td>
+                            </tr>
 
-                <?php }
+                        <?php }
 
 
-                ?>
+                        ?>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                    <table class="table table-dark" data-sorting="true" data-paging="true">
+                        <thead>
+                        <th>Player</th>
+                        <th data-type="number">Score</th>
+                        <th>Grade</th>
+                        <th data-type="date">Date</th>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($score_history as $score) { ?>
+
+                            <tr>
+                                <td>
+                                    <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
+                                </td>
+                                <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
+<br/>Early: <?= $score['early'] ?>
+<br/>Late: <?= $score['late'] ?>
+<br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
+                                <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
+                                <td><?= $score['created_at'] ?></td>
+                            </tr>
+
+                        <?php }
+
+
+                        ?>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
 
         </div>
     </div>
