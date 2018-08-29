@@ -330,7 +330,7 @@ class Data extends CI_Model {
     function song_score_history_db($song, $diff = 4) {
         $diff = $this->diff_convert($diff);
 
-	$artist = $this->db->escape($song['title']);
+	$artist = $this->db->escape($song['artist']);
         $title = $this->db->escape($song['title']);
         $diff =  $this->db->escape($diff);
 
@@ -356,6 +356,7 @@ class Data extends CI_Model {
 		ON (score.gamer_id = maxscore.gamer_id and score.score = maxscore.score)
 		INNER JOIN user
 		ON score.gamer_id = user.id
+		WHERE title=$title AND artist=$artist AND name=$diff
 		ORDER BY score.score DESC";
 
 	$query = $this->db->query($sql);
