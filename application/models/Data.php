@@ -327,6 +327,16 @@ class Data extends CI_Model {
 	return $highscores;
     }
 
+    function song_highscores_db($song, $diff = 4)
+    {
+        $diff = $this->diff_convert($diff);
+
+        $this->db->where('title', $song['title']);
+        $this->db->where('artist', $song['artist']);
+        $this->db->where('name', $diff);
+        return $this->db->get('score')->result_array();
+    }
+
     function leaderboard_title_api($diff){
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/song?&search=&difficulty_id='.$diff);

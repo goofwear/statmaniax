@@ -40,8 +40,10 @@ class Main extends CI_Controller {
 
 		$diff = $this->data->diff_convert($diff);
 		$data['song'] = $this->data->song_info_db($songid);
-		
-		$this->load->view('templates/header');
+        $data['scores'] = $this->data->song_highscores_db($data['song'], $diff);
+
+
+        $this->load->view('templates/header');
 		$this->load->view('song', $data);
  		$this->load->view('templates/footer');
 

@@ -25,6 +25,10 @@ html {
     z-index: 100;
 }
 
+.tooltip-inner {
+    white-space: pre-wrap;
+}
+
 .smx-ui-title #smx-title {
     padding-left: 1.5%;
     padding-top: 1.5%;
