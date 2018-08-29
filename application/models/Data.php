@@ -327,15 +327,42 @@ class Data extends CI_Model {
 	return $highscores;
     }
 
-    function song_highscores_db($song, $diff = 4)
-    {
+    function song_score_history_db($song, $diff = 4) {
         $diff = $this->diff_convert($diff);
 
-        $this->db->where('title', $song['title']);
-        $this->db->where('artist', $song['artist']);
+	$artist = $this->db->escape($song['title']);
+        $title = $this->db->escape($song['title']);
+        $diff =  $this->db->escape($diff);
+
+        $this->db->where('title', $title);
+        $this->db->where('artist', $artist);
         $this->db->where('name', $diff);
+        $this->db->join('user', 'user.id = score.gamer_id');
+	$this->db->order_by('created_at', 'DESC');
         return $this->db->get('score')->result_array();
     }
+
+
+    function song_highscores_db($song, $diff){
+        $diff = $this->diff_convert($diff);
+
+	$artist = $this->db->escape($song['artist']);
+	$title = $this->db->escape($song['title']);
+	$diff =  $this->db->escape($diff);
+
+	$sql = "SELECT * FROM score
+		INNER JOIN
+		(SELECT gamer_id, max(score) AS score FROM score WHERE title=$title AND artist=$artist AND name=$diff GROUP BY gamer_id) maxscore
+		ON (score.gamer_id = maxscore.gamer_id and score.score = maxscore.score)
+		INNER JOIN user
+		ON score.gamer_id = user.id
+		ORDER BY score.score DESC";
+
+	$query = $this->db->query($sql);
+	return $query->result_array();
+
+    }
+
 
     function leaderboard_title_api($diff){
 
