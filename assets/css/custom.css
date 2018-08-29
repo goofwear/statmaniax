@@ -2,6 +2,7 @@ body {
     background: linear-gradient(to top, rgba(252, 0, 255, 0.4), rgba(52, 152, 219, 0.4) 35%, rgba(19, 106, 138, 0.4) 50%), url('/assets/img/stars.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment:fixed;
 
 }
 
@@ -14,13 +15,14 @@ html {
     clip-path: polygon(100% 0, 0 0, 0 24%);
     background: rgba(0,0,0,0.5);
     color: white;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 50%;
     font-family: 'Work Sans', sans-serif;
     overflow: visible;
+    z-index: 100;
 }
 
 .smx-ui-title #smx-title {
@@ -109,6 +111,10 @@ html {
         color: white;
         font-family: 'Work Sans', sans-serif;
     }
+
+    .container-fluid {
+        margin-top: 15vh
+    }
 }
 
 .player-info img {
@@ -127,6 +133,60 @@ html {
     overflow-y: scroll;
     overflow-x: hidden;
 
+}
+
+.song {
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 450px;
+    margin: 3%;
+    box-shadow: black 6px 6px 10px;
+    border-radius: 5px;
+    border: 1px white solid;
+    overflow: hidden;
+}
+
+.smx-cover {
+
+    transform: rotateY(25deg);
+}
+
+.smx-cover-pers {
+    perspective: 1000px;
+    font-family: 'Work Sans', sans-serif;
+    color: white;
+    border-color: white;
+}
+
+
+.truncate {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+hr {
+    border-color: white;
+}
+
+.song h4 {
+    font-family: 'Work Sans', sans-serif;
+    padding-left: 1.5%;
+    padding-top: 1%;
+}
+
+.song h6 {
+    margin-left: 1.5%;
+}
+.song h5 {
+    margin-left: 1.5%;
+}
+
+
+
+.song img {
+    border-radius: 5px;
 }
 
 .element::-webkit-scrollbar { width: 0 !important }
