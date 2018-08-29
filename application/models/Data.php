@@ -99,6 +99,27 @@ class Data extends CI_Model {
 	}
     }
 
+    function song_info_db($songid){
+	$query = $this->db->get_where('song', array('game_song_id' => $songid));
+	return $query->row_array();
+
+    }
+
+    function song_scores_db($title, $artist){
+	$title = $this->db->escape($title);
+        $artist = $this->db->escape($artist);
+	$sql = "select * from score
+		inner join user
+		on user.id = score.id
+		where score.title=$title and score.artist=$artist
+		order by score desc";
+
+	$query = $this->db->query($sql);
+	return $query->result_array();
+
+
+    }
+
     function user_list_api() {
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/user');

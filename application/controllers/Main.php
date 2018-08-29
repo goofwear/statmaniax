@@ -12,8 +12,12 @@ class Main extends CI_Controller {
 
 	}
 
-	public function index()
-	{
+
+	public function index() {
+		$this->users();
+	}
+
+	public function users() {
 
 		// Pull from DB isntead
 		$data['users'] = $this->data->user_list_db();
@@ -27,11 +31,20 @@ class Main extends CI_Controller {
 	public function songs(){
 
 		$data['songs'] = $this->data->song_list_db();
-		$this->load->view('template/header');
+		$this->load->view('templates/header');
+		$this->load->view('song_list', $data);
 		$this->load->view('templates/footer');
+	}
 
+	public function song($songid, $diff='wild'){
 
-		#$this->load->view('song_list', $data);
+		$diff = $this->data->diff_convert($diff);
+		$data['song'] = $this->data->song_info_db($songid);
+		
+		$this->load->view('templates/header');
+		$this->load->view('song', $data);
+ 		$this->load->view('templates/footer');
+
 	}
 
 	public function scores($userid, $diff='wild'){

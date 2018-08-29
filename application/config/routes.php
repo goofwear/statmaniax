@@ -52,5 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 $route['scores/(:num)'] = 'main/scores/$1';
 $route['scores/(:num)/(:any)'] = 'main/scores/$1/$2';
+$route['song/(:num)'] = 'main/song/$1';
+$route['song/(:num)/(:any)'] = 'main/song/$1/$2';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
