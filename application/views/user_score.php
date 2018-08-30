@@ -81,7 +81,9 @@
 
              ?>
 
-             <td class="truncate-playerui"><?= $score['title'] ?> </td>
+             <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
+                                              href="<?= base_url('song/' . $score['game_song_id']) ?>"><?= $score['title'] ?></a>
+             </td>
              <td class="truncate-playerui"><?= $score['artist'] ?></td>
              <td><?= $score[$score['name']] ?></td>
              <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:

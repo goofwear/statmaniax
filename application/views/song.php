@@ -84,7 +84,10 @@
 
                             <tr>
                                 <td class="smx-font">
-                                    <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
+                                    <img style="border-radius: 100px; margin-right: 20px;"
+                                         src="https://data.stepmaniax.com/<?= $score['picture_path'] ?>"
+                                         width="35px"> <a style="color: white; text-decoration: underline"
+                                                          href="<?= base_url('player/' . $score['gamer_id']) ?>"> <?= $score['username'] ?></a>
                                 </td>
                                 <td class="smx-font" data-toggle="tooltip" data-placement="bottom" data-html="true"
                                     title="Grading:
@@ -119,7 +122,10 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 
                             <tr>
                                 <td class="smx-font">
-                                    <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
+                                    <img style="border-radius: 100px; margin-right: 20px;"
+                                         src="https://data.stepmaniax.com/<?= $score['picture_path'] ?>"
+                                         width="35px"> <a style="color: white; text-decoration: underline"
+                                                          href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
                                 </td>
                                 <td class="smx-font" data-toggle="tooltip" data-placement="bottom" data-html="true"
                                     title="Grading:
