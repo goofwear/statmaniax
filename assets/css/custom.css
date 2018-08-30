@@ -122,11 +122,11 @@ html {
     }
 
     .copyright {
-        position: fixed;
-        left: 2%;
-        bottom: 2%;
-        color: white;
-        font-family: 'Quicksand', sans-serif;
+        margin-top: 2%;
+        padding: 1%;
+        color: black;
+        background: linear-gradient(to right, white, rgba(0, 0, 0, 0) 60%);
+        font-family: 'Geometos', sans-serif;
     }
 
     .container-fluid {
@@ -282,3 +282,7 @@ hr {
     background: darkgoldenrod;
 }
 
+.copyright a {
+    color: rgba(48, 48, 48, 1);
+    text-decoration: underline;
+}
