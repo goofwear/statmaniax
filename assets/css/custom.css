@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Geometos';
+    src: url("/assets/geometos.ttf");
+}
+
 body {
     background: linear-gradient(to top, rgba(252, 0, 255, 0.4), rgba(52, 152, 219, 0.4) 35%, rgba(19, 106, 138, 0.4) 50%), url('/assets/img/stars.jpg');
     background-size: cover;
@@ -20,7 +25,7 @@ html {
     left: 0;
     width: 100%;
     height: 50%;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     overflow: visible;
     z-index: 100;
 }
@@ -33,6 +38,7 @@ html {
     padding-left: 1.5%;
     padding-top: 1.5%;
     font-size: 32pt;
+    font-family: 'Quicksand', sans-serif;
 }
 
 .userlist-ui {
@@ -46,7 +52,7 @@ html {
 
 .smx-userlist-name {
     color: white;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     position: relative;
 
 
@@ -57,7 +63,7 @@ html {
 
 .smx-userlist-additional {
     color: white;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     position: relative;
 
 
@@ -66,6 +72,10 @@ html {
 }
 
 @media(max-width: 700px) {
+
+    .hide-on-small {
+        display: none;
+    }
     .player-info {
         display: none;
     }
@@ -96,6 +106,9 @@ html {
         background: rgba(0,0,0,0.4);
         height: 450px;
         width: 300px;
+        color: white;
+        padding: 1%;
+        text-align: center;
     }
 
     .smx-userlist-name {
@@ -113,11 +126,22 @@ html {
         left: 2%;
         bottom: 2%;
         color: white;
-        font-family: 'Work Sans', sans-serif;
+        font-family: 'Quicksand', sans-serif;
     }
 
     .container-fluid {
         margin-top: 15vh
+    }
+
+    .container {
+        margin-top: 15vh
+    }
+
+    .container-home {
+        margin-top: 35vh !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -157,7 +181,7 @@ html {
 
 .smx-cover-pers {
     perspective: 1000px;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     color: white;
     border-color: white;
 }
@@ -170,14 +194,21 @@ html {
     text-overflow: ellipsis;
 }
 
+.truncate-playerui {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 hr {
     border-color: white;
 }
 
 .song h4 {
-    font-family: 'Work Sans', sans-serif;
     padding-left: 1.5%;
-    padding-top: 1%;
+    padding-top: 3%;
+    margin-bottom: 0;
 }
 
 .song h6 {
@@ -203,5 +234,51 @@ hr {
     border-radius: 15px;
 }
 
+.smx-font {
+    font-family: "Geometos";
+}
 
+.smx-button {
+    text-align: center;
+    color: white;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    height: 200px;
+    display: table;
+    width: 350px;
+}
+
+.smx-button .center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+    text-decoration: none;
+}
+
+.smx-userlist-container {
+    display: table;
+    width: 100%;
+
+}
+
+.smx-userlist-container .center {
+    display: table-cell;
+    vertical-align: middle;
+    color: white;
+    padding-top: 2%;
+
+}
+
+.smx-userlist-container .center a {
+    color: white;
+}
+
+.delta-nowr {
+    color: red;
+}
+
+.wr {
+    background: darkgoldenrod;
+}
 

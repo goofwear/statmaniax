@@ -10,7 +10,7 @@
             <div class="col-md-2">
                 <div class="song" style="cursor: pointer;" onclick="window.location='<?=base_url('song/' . $song['game_song_id'])?>';">
                     <img src="https://data.stepmaniax.com/<?= $song['cover_path'] ?>/cover.png" width="100%">
-                    <h4 class="truncate"><?= $song['title'] ?></h4>
+                    <h4 class="truncate smx-font"><?= $song['title'] ?></h4>
                     <h6 class="truncate"><?= $song['artist'] ?></h6>
                     <h6><?= $song['genre'] ?></h6>
                     <hr>

@@ -54,5 +54,7 @@ $route['player/(:num)'] = 'main/scores/$1';
 $route['player/(:num)/(:any)'] = 'main/scores/$1/$2';
 $route['song/(:num)'] = 'main/song/$1';
 $route['song/(:num)/(:any)'] = 'main/song/$1/$2';
+$route['songs'] = 'main/songs';
+$route['players'] = 'main/users';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

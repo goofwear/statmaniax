@@ -14,7 +14,9 @@ class Main extends CI_Controller {
 
 
 	public function index() {
-		$this->users();
+        $this->load->view('templates/header');
+        $this->load->view('home');
+        $this->load->view('templates/footer');
 	}
 
 	public function users() {

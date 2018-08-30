@@ -14,7 +14,7 @@
 
 
     <link rel="stylesheet" href="/assets/css/footable.bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/custom.css">
 
 

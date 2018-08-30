@@ -6,7 +6,7 @@
         <div class="col-md-3 smx-cover-pers">
             <img class="smx-cover" src="https://data.stepmaniax.com/<?= $song['cover_path'] ?>/cover.png" width="100%">
             <div style="padding-top: 25px"></div>
-            <h1><?=$song['title']?></h1>
+            <h1 class="smx-font"><?= $song['title'] ?></h1>
             <h4><?=$song['artist']?> // <?=$song['genre']?></h4>
              <table class="table">
                 <thead>
@@ -53,26 +53,28 @@
                 <div class="tab-pane fade show active" id="hiscores" role="tabpanel" aria-labelledby="hiscores-tab">
                     <table class="table table-dark" data-sorting="true" data-paging="true">
                         <thead>
-                        <th>Player</th>
-                        <th data-type="number">Score</th>
-                        <th>Grade</th>
-                        <th data-type="date">Date</th>
+                        <th class="smx-font">Player</th>
+                        <th class="smx-font" data-type="number">Score</th>
+                        <th class="smx-font">Grade</th>
+                        <th class="smx-font" data-type="date">Date</th>
                         </thead>
                         <tbody>
                         <?php
                         foreach ($scores as $score) { ?>
 
                             <tr>
-                                <td>
+                                <td class="smx-font">
                                     <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
                                 </td>
-                                <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+                                <td class="smx-font" data-toggle="tooltip" data-placement="bottom" data-html="true"
+                                    title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
-                                <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
-                                <td><?= $score['created_at'] ?></td>
+                                <td class="smx-font"><img src="<?= $this->data->gradetostars($score['grade']) ?>"
+                                                          width="35px"></td>
+                                <td class="smx-font"><?= $score['created_at'] ?></td>
                             </tr>
 
                         <?php }
@@ -86,26 +88,27 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
                 <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
                     <table class="table table-dark" data-sorting="true" data-paging="true">
                         <thead>
-                        <th>Player</th>
-                        <th data-type="number">Score</th>
-                        <th>Grade</th>
-                        <th data-type="date">Date</th>
+                        <th class="smx-font">Player</th>
+                        <th class="smx-font" data-type="number">Score</th>
+                        <th class="smx-font">Grade</th>
+                        <th class="smx-font" data-type="date">Date</th>
                         </thead>
                         <tbody>
                         <?php
                         foreach ($score_history as $score) { ?>
 
                             <tr>
-                                <td>
+                                <td class="smx-font">
                                     <a href="<?= base_url('player/' . $score['gamer_id']) ?>"><?= $score['username'] ?></a>
                                 </td>
-                                <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+                                <td class="smx-font" data-toggle="tooltip" data-placement="bottom" data-html="true"
+                                    title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
                                 <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
-                                <td><?= $score['created_at'] ?></td>
+                                <td class="smx-font"><?= $score['created_at'] ?></td>
                             </tr>
 
                         <?php }

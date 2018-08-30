@@ -309,7 +309,7 @@ class Data extends CI_Model {
 	$userid = $this->db->escape($userid);
         $diff = $this->db->escape($diff);
 
-	$sql = "select * from score where gamer_id=$userid and name=$diff";
+        $sql = "select * from score where gamer_id=$userid and name=$diff ";
 	$query = $this->db->query($sql);
 	$scores = $query->result_array();
         $highscores = Array();
@@ -325,6 +325,14 @@ class Data extends CI_Model {
 	}
 
 	return $highscores;
+    }
+
+    function get_song_id_by_title($title)
+    {
+        $this->db->select('game_song_id');
+        $this->db->where('title', $title);
+        $out = $this->db->get('song')->result_array()[0];
+        return $out['game_song_id'];
     }
 
     function song_score_history_db($song, $diff = 4) {
