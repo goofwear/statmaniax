@@ -39,6 +39,26 @@
                 </button>
             </div>
 
+            <p class="smx-font" style="color: white">Currently displaying scores for
+                <select onchange="setDifficulty();" id="difficulty">
+                    <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
+                    </option>
+                    <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
+                    </option>
+                    <option <?php if ($diff == "hard"): ?> selected="selected" <?php endif; ?> value="hard">Hard
+                    </option>
+                    <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
+                    </option>
+                    <option <?php if ($diff == "duel"): ?> selected="selected" <?php endif; ?> value="duel">Dual
+                    </option>
+                    <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
+                    </option>
+                    <option <?php if ($diff == "team"): ?> selected="selected" <?php endif; ?> value="team">Team
+                    </option>
+                </select>
+                mode. Select another difficulty to view scores for it.
+            </p>
+
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="hiscores-tab" data-toggle="tab" href="#hiscores" role="tab"
@@ -137,4 +157,9 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })
+
+    function setDifficulty() {
+        var diff = document.getElementById("difficulty").value;
+        window.location = "<?=base_url('song/' . $songid)?>/" + diff;
+    }
 </script>

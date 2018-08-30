@@ -5603,7 +5603,7 @@
 				this.$container.addClass('footable-paging-external').addClass(position);
 			}
 			this.$wrapper = $('<div/>', {'class': 'footable-pagination-wrapper'}).appendTo(this.$container);
-			this.$pagination = $('<ul/>', { 'class': 'pagination' }).on('click.footable', 'a.footable-page-link', { self: this }, this._onPageClicked);
+            this.$pagination = $('<ul/>', {'class': 'pagination justify-content-center bg-dark pagination-dark'}).on('click.footable', 'a.page-link', {self: this}, this._onPageClicked);
 			this.$count = $('<span/>', { 'class': 'label label-default' });
 			this.$wrapper.append(this.$pagination, $('<div/>', {'class': 'divider'}), this.$count);
 			this.detached = false;
@@ -5783,7 +5783,7 @@
 						'class': klass
 					}).attr('data-page', attr)
 						.append($('<a/>', {
-							'class': 'footable-page-link',
+                            'class': 'page-link',
 							href: '#'
 						}).data('page', attr).html(html));
 				};

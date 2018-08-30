@@ -40,6 +40,8 @@ class Main extends CI_Controller {
 
 	public function song($songid, $diff='wild'){
 
+        $data['diff'] = $diff;
+        $data['songid'] = $songid;
 		$diff = $this->data->diff_convert($diff);
 		$data['song'] = $this->data->song_info_db($songid);
 		$data['scores'] = $this->data->song_highscores_db($data['song'], $diff);

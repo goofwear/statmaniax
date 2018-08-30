@@ -286,3 +286,15 @@ hr {
     color: rgba(48, 48, 48, 1);
     text-decoration: underline;
 }
+
+.page-link {
+    background: #343a40;
+    border-color: #343a40;
+    color: white;
+    transition: 0.1s linear all;
+}
+
+.page-link:hover {
+    background: white;
+    color: #343a40;
+}
