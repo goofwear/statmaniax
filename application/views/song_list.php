@@ -12,7 +12,7 @@
                     <img src="https://data.stepmaniax.com/<?= $song['cover_path'] ?>/cover.png" width="100%">
                     <h4 class="truncate smx-font"><?= $song['title'] ?></h4>
                     <h6 class="truncate"><?= $song['artist'] ?></h6>
-                    <h6><?= $song['genre'] ?></h6>
+                    <h6><?php if(isset($song['genre'])) echo $song['genre']; else; echo "</br>"; ?></h6>
                     <hr>
                     <h5><?= $song['bpm'] ?> BPM</h5>
                     <h6 class="truncate"><a href="https://<?= $song['website'] ?>"><small><?= $song['website'] ?></small></a> </h6>
