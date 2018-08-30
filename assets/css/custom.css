@@ -195,7 +195,7 @@ html {
 }
 
 .truncate-playerui {
-    max-width: 295px;
+    max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

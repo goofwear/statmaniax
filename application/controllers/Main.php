@@ -55,7 +55,8 @@ class Main extends CI_Controller {
 
 	public function scores($userid, $diff='wild'){
 
-
+        $data['diff'] = $diff;
+        $data['userid'] = $userid;
 		$diff = $this->data->diff_convert($diff);
 
 		$data['user_scores']= $this->data->user_highscores_title_db($userid, $diff);
@@ -82,6 +83,38 @@ class Main extends CI_Controller {
             $this->load->view("search/prompt");
             $this->load->view('templates/footer');
         }
+    }
+
+    public function get_diff_by_details($title, $artist, $diff)
+    {
+        $this->db->where('title', $title);
+        $this->db->where('artist', $artist);
+        $song = $this->db->get('song')->result_array()[0];
+        $lvl = 0;
+        switch ($diff) {
+            case "basic":
+                $lvl = $song['basic'];
+                break;
+            case "easy":
+                $lvl = $song['easy'];
+                break;
+            case "hard":
+                $lvl = $song['basic'];
+                break;
+            case "wild":
+                $lvl = $song['basic'];
+                break;
+            case "basic":
+                $lvl = $song['basic'];
+                break;
+            case "basic":
+                $lvl = $song['basic'];
+                break;
+            case "basic":
+                $lvl = $song['basic'];
+                break;
+        }
+
     }
 
 }

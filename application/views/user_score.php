@@ -4,7 +4,6 @@
  <div class="player-info">
     <img src="https://data.stepmaniax.com/<?=$user_info['picture_path']?>" width="100%">
      <hr>
-     <h6 class="smx-font">Name: <?= $user_info['first'] ?> <?= $user_info['last'] ?></h6>
      <h6 class="smx-font">Total World Records: <span id="worldrecord-count">??</span></h6>
      <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
      <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
@@ -13,11 +12,32 @@
 
  <div class="container">
 
+     <p class="smx-font" style="color: white">Currently displaying scores for
+         <select onchange="setDifficulty();" id="difficulty">
+             <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
+             </option>
+             <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
+             </option>
+             <option <?php if ($diff == "hard"): ?> selected="selected" <?php endif; ?> value="hard">Hard
+             </option>
+             <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
+             </option>
+             <option <?php if ($diff == "duel"): ?> selected="selected" <?php endif; ?> value="duel">Dual
+             </option>
+             <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
+             </option>
+             <option <?php if ($diff == "team"): ?> selected="selected" <?php endif; ?> value="team">Team
+             </option>
+         </select>
+         mode. Select another difficulty to view scores for it.
+     </p>
+
      <table class="table table-dark" data-sorting="true" data-paging="true">
          <thead class="smx-font">
          <tr>
              <th>Song Title</th>
              <th>Artist</th>
+             <th>Level</th>
              <th>Score</th>
              <th>Grade</th>
              <th data-type="number">World Record</th>
@@ -63,6 +83,7 @@
 
              <td class="truncate-playerui"><?= $score['title'] ?> </td>
              <td class="truncate-playerui"><?= $score['artist'] ?></td>
+             <td><?= $score['name'] ?></td>
              <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
@@ -109,5 +130,10 @@ jQuery(function($){
         $('[data-toggle="tooltip"]').tooltip()
     })
 
-    document.getElementById("worldrecord-count").innerHTML = wr
+    document.getElementById("worldrecord-count").innerHTML = wr;
+
+    function setDifficulty() {
+        var diff = document.getElementById("difficulty").value;
+        window.location = "<?=base_url('player/' . $userid)?>/" + diff;
+    }
 </script>
