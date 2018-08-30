@@ -15,13 +15,15 @@
 
      <table class="table table-dark" data-sorting="true" data-paging="true">
          <thead class="smx-font">
-         <th>Song Title</th>
-         <th>Artist</th>
-         <th>Score</th>
-         <th>Grade</th>
-         <th data-type="number">World Record</th>
-         <th data-type="date">Date</th>
+         <tr>
+             <th>Song Title</th>
+             <th>Artist</th>
+             <th>Score</th>
+             <th>Grade</th>
+             <th data-type="number">World Record</th>
+             <th data-type="date">Date</th>
          </thead>
+         </tr>
          <tbody>
          <?php
 

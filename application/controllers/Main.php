@@ -8,7 +8,7 @@ class Main extends CI_Controller {
         	parent::__construct();
 
 
-		$this->output->enable_profiler(TRUE);
+        //$this->output->enable_profiler(TRUE);
 
 	}
 
@@ -65,5 +65,21 @@ class Main extends CI_Controller {
 		$this->load->view('templates/footer');
 
 	}
+
+    public function search()
+    {
+        if (isset($_POST['search'])) {
+            $this->db->like('username', $_POST['query']);
+            $data['results'] = $this->db->get('user')->result_array();
+
+            $this->load->view('templates/header');
+            $this->load->view("search/results", $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header');
+            $this->load->view("search/prompt");
+            $this->load->view('templates/footer');
+        }
+    }
 
 }
