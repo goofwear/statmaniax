@@ -309,7 +309,9 @@ class Data extends CI_Model {
 	$userid = $this->db->escape($userid);
         $diff = $this->db->escape($diff);
 
-        $sql = "select * from score where gamer_id=$userid and name=$diff ";
+        $sql = "select * from score
+		inner join song on score.title=song.title and score.artist=song.artist
+		where gamer_id=$userid and name=$diff";
 	$query = $this->db->query($sql);
 	$scores = $query->result_array();
         $highscores = Array();

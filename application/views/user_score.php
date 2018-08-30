@@ -83,7 +83,7 @@
 
              <td class="truncate-playerui"><?= $score['title'] ?> </td>
              <td class="truncate-playerui"><?= $score['artist'] ?></td>
-             <td><?= $score['name'] ?></td>
+             <td><?= $score[$score['name']] ?></td>
              <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>

@@ -8,15 +8,15 @@ class Main extends CI_Controller {
         	parent::__construct();
 
 
-        //$this->output->enable_profiler(TRUE);
+        #$this->output->enable_profiler(TRUE);
 
 	}
 
 
 	public function index() {
-        $this->load->view('templates/header');
-        $this->load->view('home');
-        $this->load->view('templates/footer');
+		$this->load->view('templates/header');
+		$this->load->view('home');
+		$this->load->view('templates/footer');
 	}
 
 	public function users() {
@@ -40,8 +40,8 @@ class Main extends CI_Controller {
 
 	public function song($songid, $diff='wild'){
 
-        $data['diff'] = $diff;
-        $data['songid'] = $songid;
+		$data['diff'] = $diff;
+		$data['songid'] = $songid;
 		$diff = $this->data->diff_convert($diff);
 		$data['song'] = $this->data->song_info_db($songid);
 		$data['scores'] = $this->data->song_highscores_db($data['song'], $diff);
@@ -55,8 +55,8 @@ class Main extends CI_Controller {
 
 	public function scores($userid, $diff='wild'){
 
-        $data['diff'] = $diff;
-        $data['userid'] = $userid;
+		$data['diff'] = $diff;
+		$data['userid'] = $userid;
 		$diff = $this->data->diff_convert($diff);
 
 		$data['user_scores']= $this->data->user_highscores_title_db($userid, $diff);
