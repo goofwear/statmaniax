@@ -28,10 +28,18 @@
 
 </head>
 <body>
-<div class="pos-f-t">
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-4">
-            <h5 class="text-white h4">Collapsed content</h5>
-            <span class="text-muted">Toggleable via the navbar brand.</span>
-        </div>
-    </div>
+<div id="wrapper">
+    <div class="overlay"></div>
+    <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+        <ul class="nav sidebar-nav">
+            <li><a href="#" onclick="hamburger_cross()">Close Sidebar</a></li>
+            <li><a href="<?= base_url() ?>">Home</a></li>
+            <li><a href="<?= base_url('songs') ?>">Songs</a></li>
+            <li><a href="<?= base_url('players') ?>">Players</a></li>
+            <li><a href="<?= base_url('search') ?>">Search..</a></li>
+        </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
