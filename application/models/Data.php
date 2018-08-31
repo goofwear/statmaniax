@@ -99,6 +99,22 @@ class Data extends CI_Model {
 	}
     }
 
+    function user_stats_db($userid, $diff=Null){
+	if(isset($diff)) {
+		if(is_numeric($diff))
+			$diff = $this->diff_convert($diff);
+		$userid = $this->db->escape($userid);
+                $diff = $this->db->escape($diff);
+		$sql = "SELECT grade, count(*) as count FROM `score` WHERE gamer_id=$userid and name = $diff group by grade";
+	} else {
+		$sql = "SELECT grade, count(*) as count FROM score WHERE gamer_id=$userid group by grade";
+	}
+
+	$query = $this->db->query($sql);
+	return $query->result_array();
+
+    }
+
     function song_info_db($songid){
 	$query = $this->db->get_where('song', array('game_song_id' => $songid));
 	return $query->row_array();

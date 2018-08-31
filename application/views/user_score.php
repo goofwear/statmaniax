@@ -17,6 +17,17 @@
 
  <div class="container">
 
+<!--
+<?php foreach ($user_stats as $stat): ?>
+
+
+	<img src="<?=$this->data->gradetostars($stat['grade']); ?> "></img>
+	<span><?=$stat['count'] ?></span>
+
+
+<?php endforeach; ?>
+-->
+
      <p class="smx-font" style="color: white">Currently displaying scores for
          <select onchange="setDifficulty();" id="difficulty">
              <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
@@ -37,7 +48,7 @@
          mode. Select another difficulty to view scores for it.
      </p>
 
-     <table class="table table-dark" data-sorting="true" data-paging="true">
+     <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
          <thead class="smx-font">
          <tr>
              <th>Song Title</th>
@@ -88,7 +99,7 @@
              ?>
 
              <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
-                                              href="<?= base_url('song/' . $score['game_song_id']) ?>"><?= $score['title'] ?></a>
+                                              href="<?= base_url('song/' . $score['game_song_id']."/".$score['name']) ?>"><?= $score['title'] ?></a>
              </td>
              <td class="truncate-playerui"><?= $score['artist'] ?></td>
              <td><?= $score[$score['name']] ?></td>
@@ -112,7 +123,6 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
          </tbody>
      </table>
 
-
  </div>
 
 
@@ -134,6 +144,7 @@ jQuery(function($){
 		"showToggle": false
 	});
 });
+
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()

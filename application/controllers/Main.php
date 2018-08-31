@@ -8,7 +8,7 @@ class Main extends CI_Controller {
         	parent::__construct();
 
 
-        #$this->output->enable_profiler(TRUE);
+        $this->output->enable_profiler(TRUE);
 
 	}
 
@@ -53,12 +53,17 @@ class Main extends CI_Controller {
 
 	}
 
-	public function scores($userid, $diff='wild'){
+	public function scores($userid, $diff=Null){
+
+		if(empty($diff)){
+			redirect("/player/$userid/wild");
+		}
 
 		$data['diff'] = $diff;
 		$data['userid'] = $userid;
 		$diff = $this->data->diff_convert($diff);
 
+		$data['user_stats'] = $this->data->user_stats_db($userid, $diff);
 		$data['user_scores']= $this->data->user_highscores_title_db($userid, $diff);
 		$data['world_scores'] = $this->data->leaderboard_title_db($diff);
                 $data['user_info'] = $this->data->user_info_db($userid);
