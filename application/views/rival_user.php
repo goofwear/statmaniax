@@ -42,8 +42,6 @@ $loss = 0;
                 </option>
                 <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
                 </option>
-                <option <?php if ($diff == "team"): ?> selected="selected" <?php endif; ?> value="team">Team
-                </option>
             </select>
             mode. Select another difficulty to view scores for it.
         </p>
