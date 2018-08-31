@@ -53,7 +53,7 @@
 
          <div class="row">
              <div class="col-md-3">
-                 <a href="<?= base_url('player/' . $userid . '/compare/world/wild') ?>" class="btn btn-primary ">
+                 <a href="<?= base_url('player/' . $userid . '/compare/world/' . $diff) ?>" class="btn btn-primary ">
                      <i class="fas fa-globe-americas"></i> Compare to World Records
                  </a>
              </div>
@@ -160,7 +160,7 @@ jQuery(function($){
     $('#rivalselect').typeahead({
         onSelect: function (item) {
             console.log(item);
-            window.location = "<?=base_url('player/' . $userid . '/compare')?>" + "/" + item.value + "/wild";
+            window.location = "<?=base_url('player/' . $userid . '/compare')?>" + "/" + item.value + "/<?=$diff?>";
         },
         ajax: {
             url: "<?=base_url('main/userlist')?>",
