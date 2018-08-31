@@ -68,7 +68,10 @@ $loss = 0;
 
             #print_r($score);
 
-            $world = $rival_scores[$key]['score'];
+	    if (isset($rival_scores[$key]))
+            	$world = $rival_scores[$key]['score'];
+	    else
+		$world = 0;
             $score_points = $score['score'];
             $delta = $score_points - $world;
 
