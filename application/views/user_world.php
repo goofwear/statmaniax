@@ -15,6 +15,8 @@
             <h6 class="smx-font">Total World Records: <span id="worldrecord-count">??</span></h6>
             <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
             <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
+            <hr>
+            <h6 class="smx-font">Stars Earned (All Time)</h6>
             <table class="table">
                 <?php foreach ($user_stats as $stat): ?>
 
