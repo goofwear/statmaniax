@@ -6,125 +6,130 @@
     </button>
     <h2 id="smx-title"><?=$user_info['username']?></h2>
 </div>
- <div class="player-info">
-    <img src="https://data.stepmaniax.com/<?=$user_info['picture_path']?>" width="100%">
-     <hr>
-     <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
-     <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
-     <table class="table">
-         <?php foreach ($user_stats as $stat): ?>
+<div class="container-fluid row">
+    <div class="col-md-2">
+        <div class="player-info">
+            <img src="https://data.stepmaniax.com/<?= $user_info['picture_path'] ?>" width="100%">
+            <hr>
+            <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
+            <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
+            <table class="table">
+                <?php foreach ($user_stats as $stat): ?>
 
-             <tr>
-                 <td><img src="<?= $this->data->gradetostars($stat['grade']); ?> " width="50px"></td>
-                 <td class="smx-font" style="vertical-align: middle; text-align: center"><?= $stat['count'] ?></td>
-             </tr>
-
-
-         <?php endforeach; ?>
-     </table>
- </div>
+                    <tr>
+                        <td><img src="<?= $this->data->gradetostars($stat['grade']); ?> " width="50px"></td>
+                        <td class="smx-font"
+                            style="vertical-align: middle; text-align: center"><?= $stat['count'] ?></td>
+                    </tr>
 
 
- <div class="container">
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-10">
 
 
+        <p class="smx-font" style="color: white">Currently displaying scores for
+            <select class="form-control" onchange="setDifficulty();" id="difficulty">
+                <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
+                </option>
+                <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
+                </option>
+                <option <?php if ($diff == "hard"): ?> selected="selected" <?php endif; ?> value="hard">Hard
+                </option>
+                <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
+                </option>
+                <option <?php if ($diff == "dual"): ?> selected="selected" <?php endif; ?> value="dual">Dual
+                </option>
+                <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
+                </option>
+                <option <?php if ($diff == "team"): ?> selected="selected" <?php endif; ?> value="team">Team
+                </option>
+            </select>
+            mode. Select another difficulty to view scores for it.
+        </p>
 
-     <p class="smx-font" style="color: white">Currently displaying scores for
-         <select class="form-control" onchange="setDifficulty();" id="difficulty">
-             <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
-             </option>
-             <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
-             </option>
-             <option <?php if ($diff == "hard"): ?> selected="selected" <?php endif; ?> value="hard">Hard
-             </option>
-             <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
-             </option>
-             <option <?php if ($diff == "dual"): ?> selected="selected" <?php endif; ?> value="dual">Dual
-             </option>
-             <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
-             </option>
-             <option <?php if ($diff == "team"): ?> selected="selected" <?php endif; ?> value="team">Team
-             </option>
-         </select>
-         mode. Select another difficulty to view scores for it.
-     </p>
+        <div class="bg-dark" style="width: 100%; padding: 1%">
 
-     <div class="bg-dark" style="width: 100%; padding: 1%">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="<?= base_url('player/' . $userid . '/compare/world/' . $diff) ?>" class="btn btn-primary ">
+                        <i class="fas fa-globe-americas"></i> Compare to World Records
+                    </a>
+                </div>
+                <div class="col-md-9">
+                    <input class="form-control" id="rivalselect" type="text" name="rivalselect"
+                           placeholder="Type to find rival.." autocomplete="off">
+                </div>
+            </div>
+            </p>
 
-         <div class="row">
-             <div class="col-md-3">
-                 <a href="<?= base_url('player/' . $userid . '/compare/world/' . $diff) ?>" class="btn btn-primary ">
-                     <i class="fas fa-globe-americas"></i> Compare to World Records
-                 </a>
-             </div>
-             <div class="col-md-9">
-                 <input class="form-control" id="rivalselect" type="text" name="rivalselect"
-                        placeholder="Type to find rival.." autocomplete="off">
-             </div>
-         </div>
-         </p>
+            <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
+                <thead class="smx-font">
+                <tr>
+                    <th>Song Title</th>
+                    <th>Artist</th>
+                    <th>Level</th>
+                    <th data-type="number">Score</th>
+                    <th>Grade</th>
 
-         <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
-             <thead class="smx-font">
-             <tr>
-                 <th>Song Title</th>
-                 <th>Artist</th>
-                 <th>Level</th>
-                 <th data-type="number">Score</th>
-                 <th>Grade</th>
+                    <th data-type="date">Date</th>
+                </thead>
+                </tr>
+                <tbody>
+                <?php
 
-                 <th data-type="date">Date</th>
-             </thead>
-             </tr>
-             <tbody>
-             <?php
-
-             $wr = 0;
-             foreach ($user_scores as $key => $score) {
+                $wr = 0;
+                foreach ($user_scores as $key => $score) {
 
 
-                 #print_r($score);
+                    #print_r($score);
 
-                 /*
-                 echo "<tr>";
-                 echo "<td>".$score['title']."</td>";
-                 echo "<td>".$score['artist']."</td>";
-                 echo "<td>".$score['score']."</td>";
-                 echo "<td>".$world."</td>";
-                 echo "<td>".$score['created_at']."</td>";
-                 echo "</tr>";
+                    /*
+                    echo "<tr>";
+                    echo "<td>".$score['title']."</td>";
+                    echo "<td>".$score['artist']."</td>";
+                    echo "<td>".$score['score']."</td>";
+                    echo "<td>".$world."</td>";
+                    echo "<td>".$score['created_at']."</td>";
+                    echo "</tr>";
 
-                 <?=base_url('song/' . $this->data->get_song_id_by_title($score['title']))?>
-                 ^ don't use, slow. needs optimisation
-                 */
+                    <?=base_url('song/' . $this->data->get_song_id_by_title($score['title']))?>
+                    ^ don't use, slow. needs optimisation
+                    */
 
-                 ?>
-                 <tr class='smx-font'>
-                     <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
-                                                      href="<?= base_url('song/' . $score['game_song_id']."/".$score['name']) ?>"><?= $score['title'] ?></a>
-                     </td>
-                     <td class="truncate-playerui"><?= $score['artist'] ?></td>
-                     <td><?= $score[$score['name']] ?></td>
-                     <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+                    ?>
+                    <tr class='smx-font'>
+                        <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
+                                                         href="<?= base_url('song/' . $score['game_song_id'] . "/" . $score['name']) ?>"><?= $score['title'] ?></a>
+                        </td>
+                        <td class="truncate-playerui"><?= $score['artist'] ?></td>
+                        <td><?= $score[$score['name']] ?></td>
+                        <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
-                     <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
-                     <td><?= $score['created_at'] ?></td>
-                 </tr>
-                 <?php
+                        <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
+                        <td><?= $score['created_at'] ?></td>
+                    </tr>
+                    <?php
 
-             }
+                }
 
 
-             ?>
+                ?>
 
-             </tbody>
-         </table>
+                </tbody>
+            </table>
 
-     </div>
- </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 
 

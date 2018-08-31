@@ -76,9 +76,7 @@ html {
     .hide-on-small {
         display: none;
     }
-    .player-info {
-        display: none;
-    }
+
 
     .smx-ui-title {
         height: 75%;
@@ -103,18 +101,6 @@ html {
 }
 
 @media (min-width: 700px) {
-    .player-info {
-        position: fixed;
-        top: 15%;
-        left: 0;
-        background: rgba(0,0,0,0.4);
-        height: 750px;
-        width: 300px;
-        color: white;
-        padding: 1%;
-        text-align: center;
-        overflow-y: scroll;
-    }
 
     .smx-userlist-name {
         transform: translateY(-50%) translateX(-7%);
@@ -148,6 +134,15 @@ html {
         justify-content: center;
         align-items: center;
     }
+}
+
+.player-info {
+
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 1%;
+    text-align: center;
+    overflow-y: scroll;
 }
 
 .player-info img {
