@@ -100,15 +100,16 @@ html {
 
 @media (min-width: 700px) {
     .player-info {
-        position: absolute;
-        top: 25%;
+        position: fixed;
+        top: 15%;
         left: 0;
         background: rgba(0,0,0,0.4);
-        height: 450px;
+        height: 750px;
         width: 300px;
         color: white;
         padding: 1%;
         text-align: center;
+        overflow-y: scroll;
     }
 
     .smx-userlist-name {

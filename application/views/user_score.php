@@ -12,21 +12,23 @@
      <h6 class="smx-font">Total World Records: <span id="worldrecord-count">??</span></h6>
      <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
      <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
+     <table class="table">
+         <?php foreach ($user_stats as $stat): ?>
+
+             <tr>
+                 <td><img src="<?= $this->data->gradetostars($stat['grade']); ?> " width="50px"></td>
+                 <td class="smx-font" style="vertical-align: middle; text-align: center"><?= $stat['count'] ?></td>
+             </tr>
+
+
+         <?php endforeach; ?>
+     </table>
  </div>
 
 
  <div class="container">
 
-<!--
-<?php foreach ($user_stats as $stat): ?>
 
-
-	<img src="<?=$this->data->gradetostars($stat['grade']); ?> "></img>
-	<span><?=$stat['count'] ?></span>
-
-
-<?php endforeach; ?>
--->
 
      <p class="smx-font" style="color: white">Currently displaying scores for
          <select onchange="setDifficulty();" id="difficulty">
@@ -54,8 +56,8 @@
              <th>Song Title</th>
              <th>Artist</th>
              <th>Level</th>
-             <th>Score</th>
-             <th>Delta</th>
+             <th data-type="number">Score</th>
+             <th data-type="number">Delta</th>
              <th>Grade</th>
              <th data-type="number">WR</th>
              <th data-type="date">Date</th>
@@ -78,7 +80,7 @@
 
              if ($delta == 0) {
                  $wr += 1;
-                 $deltadisplay = "<span class='delta-wr'>WR</span>";
+                 $deltadisplay = "<span class='delta-wr'>0</span>";
                  echo "<tr class='wr smx-font'>";
              } else {
                  echo "<tr class='smx-font'>";
