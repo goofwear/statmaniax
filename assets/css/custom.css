@@ -98,6 +98,10 @@ html {
     }
 }
 
+.fooicon {
+    font-family: FontAwesome !important;
+}
+
 @media (min-width: 700px) {
     .player-info {
         position: fixed;
@@ -281,6 +285,14 @@ hr {
 
 .wr {
     background: darkgoldenrod;
+}
+
+.rival-pos {
+    background: darkgreen;
+}
+
+.rival-neg {
+    background: darkred;
 }
 
 .copyright a {
