@@ -9,7 +9,6 @@
  <div class="player-info">
     <img src="https://data.stepmaniax.com/<?=$user_info['picture_path']?>" width="100%">
      <hr>
-     <h6 class="smx-font">Total World Records: <span id="worldrecord-count">??</span></h6>
      <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
      <h6 class="smx-font">Total: <?= number_format($user_info['total_score']) ?></h6>
      <table class="table">
@@ -57,9 +56,8 @@
              <th>Artist</th>
              <th>Level</th>
              <th data-type="number">Score</th>
-             <th data-type="number">Delta</th>
              <th>Grade</th>
-             <th data-type="number">WR</th>
+             >
              <th data-type="date">Date</th>
          </thead>
          </tr>
@@ -72,19 +70,6 @@
 
              #print_r($score);
 
-             $world = $world_scores[$key]['score'];
-             $score_points = $score['score'];
-             $delta = $world - $score_points;
-
-             $deltadisplay = "<span class='delta-nowr'>-" . $delta . "</span>";
-
-             if ($delta == 0) {
-                 $wr += 1;
-                 $deltadisplay = "<span class='delta-wr'>0</span>";
-                 echo "<tr class='wr smx-font'>";
-             } else {
-                 echo "<tr class='smx-font'>";
-             }
              /*
              echo "<tr>";
              echo "<td>".$score['title']."</td>";
@@ -99,7 +84,7 @@
              */
 
              ?>
-
+             <tr class='smx-font'>
              <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
                                               href="<?= base_url('song/' . $score['game_song_id']."/".$score['name']) ?>"><?= $score['title'] ?></a>
              </td>
@@ -110,9 +95,7 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
-             <td><?= $deltadisplay ?></td>
              <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
-             <td><?= $world ?></td>
              <td><?= $score['created_at'] ?></td>
              </tr>
              <?php

@@ -91,13 +91,16 @@ class Main extends CI_Controller {
 		$data['user_info'] = $this->data->user_info_db($userid);
 
 
-		if ($rivalid == "world"){
-            $data['world_scores'] = $this->data->leaderboard_title_db($diff);
-		} else {
-			$data['rival_scores'] = $this->data->user_highscores_title_db($rivalid, $diff);
-            $data['rival_info'] = $this->data->user_info_db($rivalid);
-            $view = "rival_user";
-		}
+        if (isset($rivalid)) {
+            if ($rivalid == "world") {
+                $data['world_scores'] = $this->data->leaderboard_title_db($diff);
+                $view = "user_world";
+            } else {
+                $data['rival_scores'] = $this->data->user_highscores_title_db($rivalid, $diff);
+                $data['rival_info'] = $this->data->user_info_db($rivalid);
+                $view = "rival_user";
+            }
+        }
 
 		$this->load->view('templates/header');
         $this->load->view($view, $data);
