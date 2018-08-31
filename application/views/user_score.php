@@ -44,8 +44,9 @@
              <th>Artist</th>
              <th>Level</th>
              <th>Score</th>
+             <th>Delta</th>
              <th>Grade</th>
-             <th data-type="number">World Record</th>
+             <th data-type="number">WR</th>
              <th data-type="date">Date</th>
          </thead>
          </tr>
@@ -62,11 +63,11 @@
              $score_points = $score['score'];
              $delta = $world - $score_points;
 
-             $deltadisplay = "<span class='delta-nowr'>(-" . $delta . ")</span>";
+             $deltadisplay = "<span class='delta-nowr'>-" . $delta . "</span>";
 
              if ($delta == 0) {
                  $wr += 1;
-                 $deltadisplay = "<span class='delta-wr'>(WR)</span>";
+                 $deltadisplay = "<span class='delta-wr'>WR</span>";
                  echo "<tr class='wr smx-font'>";
              } else {
                  echo "<tr class='smx-font'>";
@@ -95,7 +96,8 @@
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
-<br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?> <?= $deltadisplay ?></td>
+<br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
+             <td><?= $deltadisplay ?></td>
              <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
              <td><?= $world ?></td>
              <td><?= $score['created_at'] ?></td>
