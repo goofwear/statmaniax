@@ -8,6 +8,9 @@ body {
     background-size: cover;
     background-position: center;
     background-attachment:fixed;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 
 }
 
@@ -113,7 +116,6 @@ html {
     }
 
     .copyright {
-        margin-top: 2%;
         padding: 1%;
         color: black;
         background: linear-gradient(to right, white, rgba(0, 0, 0, 0) 60%);
@@ -353,6 +355,7 @@ html {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    flex: 1;
 }
 
 #wrapper.toggled {
