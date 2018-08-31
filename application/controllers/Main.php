@@ -8,7 +8,7 @@ class Main extends CI_Controller {
         	parent::__construct();
 
 
-        $this->output->enable_profiler(TRUE);
+        #$this->output->enable_profiler(TRUE);
 
 	}
 
@@ -57,7 +57,7 @@ class Main extends CI_Controller {
 
 		if(empty($diff)){
 			redirect("/player/$userid/wild");
-		}
+		}	
 
 		$data['diff'] = $diff;
 		$data['userid'] = $userid;
@@ -68,6 +68,32 @@ class Main extends CI_Controller {
 		$data['world_scores'] = $this->data->leaderboard_title_db($diff);
                 $data['user_info'] = $this->data->user_info_db($userid);
 		
+		$this->load->view('templates/header');
+		$this->load->view("user_score", $data);
+		$this->load->view('templates/footer');
+
+	}
+
+	public function rival($userid, $rivalid, $diff=Null) {
+
+		if(empty($diff))
+			redirect("/player/$userid/compare/$rivalid/wild");
+
+		$data['diff'] = $diff;
+		$data['userid'] = $userid;
+		$data['rivalid'] = $rivalid;
+		$diff = $this->data->diff_convert($diff);
+
+		$data['user_stats'] = $this->data->user_stats_db($userid, $diff);
+		$data['user_scores']= $this->data->user_highscores_title_db($userid, $diff);
+		$data['user_info'] = $this->data->user_info_db($userid);
+
+		if ($rivalid == "world"){
+			$data['rival_scores'] = $this->data->leaderboard_title_db($diff);
+		} else {
+			$data['rival_scores'] = $this->data->user_highscores_title_db($rivalid, $diff);
+		}
+
 		$this->load->view('templates/header');
 		$this->load->view("user_score", $data);
 		$this->load->view('templates/footer');
