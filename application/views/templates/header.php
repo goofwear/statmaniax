@@ -16,9 +16,7 @@
     <link rel="stylesheet" href="/assets/css/footable.bootstrap.min.css">
       <link href="https://fonts.googleapis.com/css?family=Quicksand:300" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/custom.css">
-
-      <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.3.1/css/all.css"
-            integrity="sha384-9ralMzdK1QYsk4yBY680hmsb4/hJ98xK3w0TIaJ3ll4POWpWUYaA2bRjGGujGT8w" crossorigin="anonymous">
+      <link rel="stylesheet" href="/assets/css/all.css">
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
