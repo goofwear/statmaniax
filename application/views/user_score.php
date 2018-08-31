@@ -40,7 +40,7 @@
              </option>
              <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
              </option>
-             <option <?php if ($diff == "duel"): ?> selected="selected" <?php endif; ?> value="duel">Dual
+             <option <?php if ($diff == "dual"): ?> selected="selected" <?php endif; ?> value="dual">Dual
              </option>
              <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
              </option>

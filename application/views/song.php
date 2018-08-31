@@ -29,7 +29,7 @@
                     <td><?=$song['easy']?></td>
                     <td><?=$song['hard']?></td>
                     <td style="border-right: 1px white solid;"><?= $song['wild'] ?></td>
-                    <td><?=$song['duel']?></td>
+                    <td><?=$song['dual']?></td>
                     <td><?=$song['full']?></td>
                     <td><?=$song['team']?></td>
                 </tr>
@@ -54,7 +54,7 @@
                     </option>
                     <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
                     </option>
-                    <option <?php if ($diff == "duel"): ?> selected="selected" <?php endif; ?> value="duel">Dual
+                    <option <?php if ($diff == "dual"): ?> selected="selected" <?php endif; ?> value="dual">Dual
                     </option>
                     <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
                     </option>
