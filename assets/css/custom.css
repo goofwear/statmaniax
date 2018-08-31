@@ -196,6 +196,13 @@ html {
     border-color: white;
 }
 
+.back-button {
+    width: 158px;
+    z-index: 250;
+    position: absolute;
+    top: 5px;
+    left: 45vw;
+}
 
 .truncate {
     width: 250px;

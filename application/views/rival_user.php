@@ -11,7 +11,8 @@ $loss = 0;
     </button>
     <h2 id="smx-title">COMPARE</h2>
 </div>
-
+<a href="<?= base_url('player/' . $userid . '/' . $diff) ?>" class="back-button"><img
+            src="<?= base_url('assets/img/back.png') ?>" width="158px"></a>
 <div class="container-fluid row">
     <div class="col-md-2">
         <div class="player-info">
