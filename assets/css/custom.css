@@ -312,6 +312,14 @@ hr {
     color: #343a40;
 }
 
+.typeahead li {
+    padding: 1%;
+}
+
+.typeahead li a {
+    color: black;
+}
+
 /* sidebar */
 body {
     position: relative;

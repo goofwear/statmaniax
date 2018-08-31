@@ -156,4 +156,12 @@ class Main extends CI_Controller {
 
     }
 
+    function userlist()
+    {
+        if (isset($_POST['search'])) {
+            $this->db->like('username', $_POST['search']);
+        }
+        die(json_encode($this->db->get('user')->result_array()));
+    }
+
 }

@@ -49,65 +49,81 @@
          mode. Select another difficulty to view scores for it.
      </p>
 
-     <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
-         <thead class="smx-font">
-         <tr>
-             <th>Song Title</th>
-             <th>Artist</th>
-             <th>Level</th>
-             <th data-type="number">Score</th>
-             <th>Grade</th>
-             >
-             <th data-type="date">Date</th>
-         </thead>
-         </tr>
-         <tbody>
-         <?php
+     <div class="bg-dark" style="width: 100%; padding: 1%">
 
-         $wr = 0;
-         foreach ($user_scores as $key => $score) {
+         <div class="row">
+             <div class="col-md-3">
+                 <a href="<?= base_url('player/' . $userid . '/compare/world/wild    ') ?>" class="btn btn-primary ">
+                     <i class="fas fa-globe-americas"></i> Compare to World Records
+                 </a>
+             </div>
+             <div class="col-md-9">
+                 <input class="form-control" id="rivalselect" type="text" name="rivalselect"
+                        placeholder="Type to find rival.." autocomplete="off">
+             </div>
+         </div>
+         </p>
+
+         <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
+             <thead class="smx-font">
+             <tr>
+                 <th>Song Title</th>
+                 <th>Artist</th>
+                 <th>Level</th>
+                 <th data-type="number">Score</th>
+                 <th>Grade</th>
+
+                 <th data-type="date">Date</th>
+             </thead>
+             </tr>
+             <tbody>
+             <?php
+
+             $wr = 0;
+             foreach ($user_scores as $key => $score) {
 
 
-             #print_r($score);
+                 #print_r($score);
 
-             /*
-             echo "<tr>";
-             echo "<td>".$score['title']."</td>";
-             echo "<td>".$score['artist']."</td>";
-             echo "<td>".$score['score']."</td>";
-             echo "<td>".$world."</td>";
-             echo "<td>".$score['created_at']."</td>";
-             echo "</tr>";
+                 /*
+                 echo "<tr>";
+                 echo "<td>".$score['title']."</td>";
+                 echo "<td>".$score['artist']."</td>";
+                 echo "<td>".$score['score']."</td>";
+                 echo "<td>".$world."</td>";
+                 echo "<td>".$score['created_at']."</td>";
+                 echo "</tr>";
 
-             <?=base_url('song/' . $this->data->get_song_id_by_title($score['title']))?>
-             ^ don't use, slow. needs optimisation
-             */
+                 <?=base_url('song/' . $this->data->get_song_id_by_title($score['title']))?>
+                 ^ don't use, slow. needs optimisation
+                 */
 
-             ?>
-             <tr class='smx-font'>
-             <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
-                                              href="<?= base_url('song/' . $score['game_song_id']."/".$score['name']) ?>"><?= $score['title'] ?></a>
-             </td>
-             <td class="truncate-playerui"><?= $score['artist'] ?></td>
-             <td><?= $score[$score['name']] ?></td>
-             <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
+                 ?>
+                 <tr class='smx-font'>
+                     <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
+                                                      href="<?= base_url('song/' . $score['game_song_id']."/".$score['name']) ?>"><?= $score['title'] ?></a>
+                     </td>
+                     <td class="truncate-playerui"><?= $score['artist'] ?></td>
+                     <td><?= $score[$score['name']] ?></td>
+                     <td data-toggle="tooltip" data-placement="bottom" data-html="true" title="Grading:
 Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
 <br/>Early: <?= $score['early'] ?>
 <br/>Late: <?= $score['late'] ?>
 <br/>Miss: <?= $score['misses'] ?>"><?= $score['score'] ?></td>
-             <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
-             <td><?= $score['created_at'] ?></td>
-             </tr>
-             <?php
+                     <td><img src="<?= $this->data->gradetostars($score['grade']) ?>" width="35px"></td>
+                     <td><?= $score['created_at'] ?></td>
+                 </tr>
+                 <?php
 
-         }
+             }
 
 
-         ?>
+             ?>
 
-         </tbody>
-     </table>
+             </tbody>
+         </table>
 
+     </div>
  </div>
 
 
@@ -133,12 +149,40 @@ jQuery(function($){
 
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
-    })
+    });
 
-    document.getElementById("worldrecord-count").innerHTML = wr;
 
     function setDifficulty() {
         var diff = document.getElementById("difficulty").value;
         window.location = "<?=base_url('player/' . $userid)?>/" + diff;
     }
+
+    $('#rivalselect').typeahead({
+        onSelect: function (item) {
+            console.log(item);
+            window.location = "<?=base_url('player/' . $userid . '/compare')?>" + "/" + item.value + "/wild";
+        },
+        ajax: {
+            url: "<?=base_url('main/userlist')?>",
+            timeout: 500,
+            displayField: "username",
+            triggerLength: 1,
+            method: "post",
+            loadingClass: "loading-circle",
+            preDispatch: function (query) {
+                return {
+                    search: query
+                }
+            },
+            preProcess: function (data) {
+                console.log(data);
+                if (data.success === false) {
+                    // Hide the list, there was some error
+                    return false;
+                }
+                // We good!
+                return data;
+            }
+        }
+    });
 </script>
