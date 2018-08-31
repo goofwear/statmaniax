@@ -45,7 +45,7 @@
             </div>
 
             <p class="smx-font" style="color: white">Currently displaying scores for
-                <select onchange="setDifficulty();" id="difficulty">
+                <select class="form-control" onchange="setDifficulty();" id="difficulty">
                     <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
                     </option>
                     <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy

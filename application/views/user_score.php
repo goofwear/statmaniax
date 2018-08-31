@@ -30,7 +30,7 @@
 
 
      <p class="smx-font" style="color: white">Currently displaying scores for
-         <select onchange="setDifficulty();" id="difficulty">
+         <select class="form-control" onchange="setDifficulty();" id="difficulty">
              <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
              </option>
              <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
@@ -53,7 +53,7 @@
 
          <div class="row">
              <div class="col-md-3">
-                 <a href="<?= base_url('player/' . $userid . '/compare/world/wild    ') ?>" class="btn btn-primary ">
+                 <a href="<?= base_url('player/' . $userid . '/compare/world/wild') ?>" class="btn btn-primary ">
                      <i class="fas fa-globe-americas"></i> Compare to World Records
                  </a>
              </div>
