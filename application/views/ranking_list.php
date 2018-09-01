@@ -9,47 +9,58 @@
 
 
 <div class="container">
+    <p class="smx-font" style="color: white">Currently displaying ranking information for
+        <select class="form-control" onchange="setDifficulty();" id="difficulty">
+            <option <?php if ($diff == "basic"): ?> selected="selected" <?php endif; ?> value="basic">Basic
+            </option>
+            <option <?php if ($diff == "easy"): ?> selected="selected" <?php endif; ?> value="easy">Easy
+            </option>
+            <option <?php if ($diff == "hard"): ?> selected="selected" <?php endif; ?> value="hard">Hard
+            </option>
+            <option <?php if ($diff == "wild"): ?> selected="selected" <?php endif; ?> value="wild">Wild
+            </option>
+            <option <?php if ($diff == "dual"): ?> selected="selected" <?php endif; ?> value="dual">Dual
+            </option>
+            <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
+            </option>
+        </select>
+        mode.
+    </p>
+    <div class="userlist-ui">
 
-    <table class="table table-dark" data-sorting="true">
-        <thead>
-        <th>Player</th>
-        <th data-type="number">Basic</th>
-        <th data-type="number">Easy</th>
-        <th data-type="number">Hard</th>
-        <th data-type="number">Wild</th>
-        <th data-type="number">Dual</th>
-        <th data-type="number">Full</th>
-        </thead>
-        <tbody>
-        <?php foreach ($rankings as $user):
-            $user_info = $this->data->user_info_db($user['user_id']);
-            ?>
-            <tr>
-                <td><img style="border-radius: 100px; margin-right: 20px;"
-                         src="https://data.stepmaniax.com/<?= $user_info['picture_path'] ?>"
-                         width="35px"> <a style="color: white; text-decoration: underline"
-                                          href="<?= base_url('player/' . $user_info['id']) ?>"> <?= $user_info['username'] ?></a>
-                </td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'basic')) ?></td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'easy')) ?></td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'hard')) ?></td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'wild')) ?></td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'dual')) ?></td>
-                <td><?= number_format($this->data->getRank($user['user_id'], 'full')) ?></td>
-            </tr>
+        <?php
+        $rank = 1;
+        foreach ($rankings as $user):
+            if (isset($user['picture_path'])):
+                $userid = $this->data->parse_picture_path($user['picture_path']);
+                ?>
 
-        <?php endforeach; ?>
-        </tbody>
-    </table>
+                <div class="userlist-user">
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="hide-on-small" src="https://data.stepmaniax.com/<?= $user['picture_path'] ?>"
+                                 width="100">
+                        </div>
+                        <div class="col-10">
+                            <div class="smx-userlist-container">
+                                <div class="center smx-font">
+                                    <a href="player/<?= $userid ?>"><h2>#<?= $rank ?>: <?= $user['username'] ?></h2></a>
+                                    <p>Rank Points: <?= number_format($user['rank']) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
-</div>
+                <?php $rank++; endif; endforeach; ?>
 
+        <div>
+        </div>
+    </div>
 <script>
-    jQuery(function ($) {
-        $('.table').footable({
-            "expandFirst": false,
-            "showToggle": false
-        });
-    });
+    function setDifficulty() {
+        var diff = document.getElementById("difficulty").value;
+        window.location = "<?=base_url('ranking')?>/" + diff;
+    }
 </script>

@@ -7,9 +7,13 @@
     <h2 id="smx-title">STATMANIAX</h2>
 </div>
 
-<div class="container">
+<div class="container" style="margin-top: 5vh">
     <div class="alert alert-danger smx-font"><b>This is unofficial!</b> StatManiaX is an unofficial UI for StepManiaX,
         updated every 30 minutes with information downloaded direct from StepManiaX.
+    </div>
+    <div class="update-note">
+        <p>StatManiaX v1.1 - Updated 1 Sep 2018 - Fixed mobile support, rankings added, added search by country, misc
+            changes</p>
     </div>
 
 </div>

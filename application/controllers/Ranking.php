@@ -11,11 +11,16 @@ class Ranking extends CI_Controller {
 		$this->output->enable_profiler(TRUE);}
 
 
-	public function index() {
+    public function index($diff = "wild")
+    {
 
 		#$this->update_all();
-        $this->db->group_by('user_id');
+        $this->db->where('name', $diff);
+        $this->db->where('rank >', 0);
+        $this->db->order_by('rank', 'desc');
+        $this->db->join('user', 'user.id = ranking.user_id');
         $data['rankings'] = $this->db->get('ranking')->result_array();
+        $data['diff'] = $diff;
 
         $this->load->view('templates/header');
         $this->load->view('ranking_list', $data);
