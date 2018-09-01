@@ -629,4 +629,13 @@ class Data extends CI_Model {
         return $this->db->get('ranking')->result_array()[0]['rank'];
 
     }
+
+    function get_ranking_data($diff)
+    {
+        $this->db->where('name', $diff);
+        $this->db->where('rank >', 0);
+        $this->db->order_by('rank', 'desc');
+        $this->db->join('user', 'user.id = ranking.user_id');
+        return $this->db->get('ranking')->result_array();
+    }
 }

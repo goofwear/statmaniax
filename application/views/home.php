@@ -48,7 +48,7 @@
             <div class="smx-button">
                 <a href="<?= base_url('ranking') ?>" class="center">
                     <h2 class="smx-font">RANKINGS</h2>
-                    <p class="smx-font">View how a player compares to others (wip, may be slow!)</p>
+                    <p class="smx-font">View how a player compares to others</p>
                 </a>
             </div>
         </div>

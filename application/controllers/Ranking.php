@@ -15,11 +15,8 @@ class Ranking extends CI_Controller {
     {
 
 		#$this->update_all();
-        $this->db->where('name', $diff);
-        $this->db->where('rank >', 0);
-        $this->db->order_by('rank', 'desc');
-        $this->db->join('user', 'user.id = ranking.user_id');
-        $data['rankings'] = $this->db->get('ranking')->result_array();
+
+        $data['rankings'] = $this->data->get_ranking_data();
         $data['diff'] = $diff;
 
         $this->load->view('templates/header');
