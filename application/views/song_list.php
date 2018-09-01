@@ -8,7 +8,7 @@
 </div>
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom: 5%">
 
     <div class="row">
         <?php foreach ($songs as $song): ?>
