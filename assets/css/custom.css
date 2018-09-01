@@ -702,4 +702,6 @@ html {
     z-index: 1;
 }
 
-
+.footable-details {
+    background: #1a1a1a !important;
+}

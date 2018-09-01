@@ -59,14 +59,14 @@
         <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
             <thead class="smx-font">
             <tr>
-                <th>Song Title</th>
-                <th>Artist</th>
+                <th class="truncate">Song Title</th>
+                <th data-breakpoints="xs sm">Artist</th>
                 <th>Level</th>
                 <th data-type="number">Score</th>
-                <th data-type="number">Delta</th>
-                <th>Grade</th>
-                <th data-type="number">WR</th>
-                <th data-type="date">Date</th>
+                <th data-type="number" data-breakpoints="xs sm">Delta</th>
+                <th data-breakpoints="xs sm">Grade</th>
+                <th data-type="number" data-breakpoints="xs sm">WR</th>
+                <th data-type="date" data-breakpoints="xs sm">Date</th>
             </thead>
             </tr>
             <tbody>
@@ -142,10 +142,7 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
     var wr = <?=$wr?>;
 
     jQuery(function ($) {
-        $('.table').footable({
-            "expandFirst": false,
-            "showToggle": false
-        });
+        $('.table').footable();
     });
 
 

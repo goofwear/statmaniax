@@ -63,18 +63,18 @@
                            placeholder="Type to find rival.." autocomplete="off">
                 </div>
             </div>
-            </p>
+
 
             <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
                 <thead class="smx-font">
                 <tr>
-                    <th>Song Title</th>
-                    <th>Artist</th>
+                    <th class="truncate">Song Title</th>
+                    <th data-breakpoints="xs sm">Artist</th>
                     <th data-type="number">Level</th>
                     <th data-type="number">Score</th>
-                    <th>Grade</th>
+                    <th data-breakpoints="xs sm">Grade</th>
 
-                    <th data-type="date">Date</th>
+                    <th data-breakpoints="xs sm" data-type="date">Date</th>
                 </thead>
                 </tr>
                 <tbody>
@@ -145,10 +145,7 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
     var wr = <?=$wr?>;
 
 jQuery(function($){
-	$('.table').footable({
-		"expandFirst": false,
-		"showToggle": false
-	});
+    $('.table').footable();
 });
 
 

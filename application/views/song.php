@@ -78,8 +78,8 @@
                         <thead>
                         <th class="smx-font">Player</th>
                         <th class="smx-font" data-type="number">Score</th>
-                        <th class="smx-font">Grade</th>
-                        <th class="smx-font" data-type="date">Date</th>
+                        <th class="smx-font" data-breakpoints="xs sm">Grade</th>
+                        <th class="smx-font" data-type="date" data-breakpoints="xs sm">Date</th>
                         </thead>
                         <tbody>
                         <?php
@@ -116,8 +116,8 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
                         <thead>
                         <th class="smx-font">Player</th>
                         <th class="smx-font" data-type="number">Score</th>
-                        <th class="smx-font">Grade</th>
-                        <th class="smx-font" data-type="date">Date</th>
+                        <th class="smx-font" data-breakpoints="xs sm">Grade</th>
+                        <th class="smx-font" data-type="date" data-breakpoints="xs sm">Date</th>
                         </thead>
                         <tbody>
                         <?php

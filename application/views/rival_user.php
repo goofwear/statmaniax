@@ -51,13 +51,13 @@ $loss = 0;
         <table class="table table-dark" data-sorting="true" data-paging="false" data-paging-size="25">
             <thead class="smx-font">
             <tr>
-                <th>Song Title</th>
-                <th>Artist</th>
+                <th class="truncate">Song Title</th>
+                <th data-breakpoints="xs sm">Artist</th>
                 <th>Level</th>
                 <th data-type="number">Score</th>
-                <th data-type="number">Delta</th>
-                <th data-type="number">Rival</th>
-                <th data-type="date">Date</th>
+                <th data-type="number" data-breakpoints="xs sm">Delta</th>
+                <th data-type="number" data-breakpoints="xs sm">Rival</th>
+                <th data-type="date" data-breakpoints="xs sm">Date</th>
             </thead>
             </tr>
             <tbody>
