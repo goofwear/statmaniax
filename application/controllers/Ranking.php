@@ -14,7 +14,12 @@ class Ranking extends CI_Controller {
 	public function index() {
 
 		#$this->update_all();
-		$this->load->view('updated');
+        $this->db->group_by('user_id');
+        $data['rankings'] = $this->db->get('ranking')->result_array();
+
+        $this->load->view('templates/header');
+        $this->load->view('ranking_list', $data);
+        $this->load->view('templates/footer');
 	}
 	
 	public function generateRankings() {

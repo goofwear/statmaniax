@@ -70,7 +70,7 @@
                 <tr>
                     <th>Song Title</th>
                     <th>Artist</th>
-                    <th>Level</th>
+                    <th data-type="number">Level</th>
                     <th data-type="number">Score</th>
                     <th>Grade</th>
 

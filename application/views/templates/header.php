@@ -37,6 +37,7 @@
             <li><a href="<?= base_url() ?>">Home</a></li>
             <li><a href="<?= base_url('songs') ?>">Songs</a></li>
             <li><a href="<?= base_url('players') ?>">Players</a></li>
+            <li><a href="<?= base_url('ranking') ?>">Rankings</a></li>
             <li><a href="<?= base_url('search') ?>">Search..</a></li>
         </ul>
     </nav>

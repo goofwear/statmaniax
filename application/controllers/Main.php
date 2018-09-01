@@ -110,16 +110,25 @@ class Main extends CI_Controller {
 
     public function search()
     {
+
+        $this->db->group_by('country');
+        $data['countries'] = $this->db->get('user')->result_array();
+
         if (isset($_POST['search'])) {
-            $this->db->like('username', $_POST['query']);
-            $data['results'] = $this->db->get('user')->result_array();
+            if (isset($_POST['country'])) {
+                $this->db->where('country', $_POST['country']);
+                $data['results'] = $this->db->get('user')->result_array();
+            } else {
+                $this->db->like('username', $_POST['query']);
+                $data['results'] = $this->db->get('user')->result_array();
+            }
 
             $this->load->view('templates/header');
             $this->load->view("search/results", $data);
             $this->load->view('templates/footer');
         } else {
             $this->load->view('templates/header');
-            $this->load->view("search/prompt");
+            $this->load->view("search/prompt", $data);
             $this->load->view('templates/footer');
         }
     }

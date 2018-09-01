@@ -42,6 +42,8 @@ html {
     padding-top: 1.5%;
     font-size: 32pt;
     font-family: 'Quicksand', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
 .userlist-ui {
@@ -92,6 +94,10 @@ html {
 
     .smx-userlist-additional {
         transform: translateX(10%);
+    }
+
+    #smx-title {
+        display: none;
     }
 }
 
@@ -152,7 +158,7 @@ html {
     color: white;
     padding: 1%;
     text-align: center;
-    overflow-y: scroll;
+    border-radius: 15px;
 }
 
 .player-info img {
@@ -199,7 +205,7 @@ html {
 .back-button {
     width: 158px;
     z-index: 250;
-    position: absolute;
+    position: fixed;
     top: 5px;
     left: 45vw;
 }

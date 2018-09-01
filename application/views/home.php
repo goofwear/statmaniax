@@ -13,10 +13,10 @@
     </div>
 
 </div>
-<div class="container container-home">
+<div class="container-fluid container-home">
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="smx-button">
                 <a href="<?= base_url('players') ?>" class="center">
                     <h2 class="smx-font">USERS</h2>
@@ -24,7 +24,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="smx-button">
                 <a href="<?= base_url('songs') ?>" class="center">
                     <h2 class="smx-font">SONGS</h2>
@@ -32,11 +32,19 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="smx-button">
                 <a href="<?= base_url('search') ?>" class="center">
                     <h2 class="smx-font">SEARCH</h2>
-                    <p class="smx-font">Search for players</p>
+                    <p class="smx-font">Search for players by name or country</p>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="smx-button">
+                <a href="<?= base_url('ranking') ?>" class="center">
+                    <h2 class="smx-font">RANKINGS</h2>
+                    <p class="smx-font">View how a player compares to others (wip, may be slow!)</p>
                 </a>
             </div>
         </div>

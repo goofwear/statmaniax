@@ -23,6 +23,25 @@
 
     </form>
     <hr>
+    <form method="post">
+
+        <div class="row">
+            <div class="col-10">
+                <p class="smx-font" style="color: white">Search by country: <select name="country">
+                        <?php foreach ($countries as $country):
+                            if ($country['country'] == null) continue;
+                            ?>
+                            <option value="<?= $country['country'] ?>"><?= $country['country'] ?></option>
+                        <?php endforeach; ?>
+                    </select></p>
+            </div>
+            <div class="col-2">
+                <button type="submit" name="search" class="btn btn-lg btn-success">Country Search</button>
+            </div>
+        </div>
+
+    </form>
+    <hr>
     <div class="userlist-ui" style="margin-top: 0">
 
         <?php foreach ($results as $user):
@@ -53,4 +72,5 @@
         <div>
 
         </div>
+    </div>
 

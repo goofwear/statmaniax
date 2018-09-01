@@ -620,4 +620,13 @@ class Data extends CI_Model {
         return $out;
     }
 
+    function getRank($user, $type)
+    {
+        $this->db->select('rank');
+        $this->db->where('user_id', $user);
+        $this->db->where('name', $type);
+
+        return $this->db->get('ranking')->result_array()[0]['rank'];
+
+    }
 }
