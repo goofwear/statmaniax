@@ -44,7 +44,8 @@
                         <div class="col-10">
                             <div class="smx-userlist-container">
                                 <div class="center smx-font">
-                                    <a href="player/<?= $userid ?>"><h2>#<?= $rank ?>: <?= $user['username'] ?></h2></a>
+                                    <a href="<?= base_url('player/' . $userid) ?>"><h2>#<?= $rank ?>
+                                            : <?= $user['username'] ?></h2></a>
                                     <p>Rank Points: <?= number_format($user['rank']) ?></p>
                                 </div>
                             </div>
