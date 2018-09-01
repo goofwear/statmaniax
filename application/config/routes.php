@@ -55,6 +55,7 @@ $route['player/(:num)/(:any)'] = 'main/scores/$1/$2';
 $route['player/(:num)/compare/(:any)/(:any)'] = 'main/rival/$1/$2/$3';
 $route['song/(:num)'] = 'main/song/$1';
 $route['song/(:num)/(:any)'] = 'main/song/$1/$2';
+$route['ranking'] = 'ranking';
 $route['songs'] = 'main/songs';
 $route['players'] = 'main/users';
 $route['search'] = 'main/search';
