@@ -16,7 +16,7 @@ class Ranking extends CI_Controller {
 
 		#$this->update_all();
 
-        $data['rankings'] = $this->data->get_ranking_data();
+        $data['rankings'] = $this->data->get_ranking_data($diff);
         $data['diff'] = $diff;
 
         $this->load->view('templates/header');
