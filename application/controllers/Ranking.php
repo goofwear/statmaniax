@@ -8,7 +8,8 @@ class Ranking extends CI_Controller {
         	parent::__construct();
 
 
-		$this->output->enable_profiler(TRUE);}
+        #$this->output->enable_profiler(TRUE);
+    }
 
 
     public function index($diff = "wild")
