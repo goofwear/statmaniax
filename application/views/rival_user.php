@@ -78,12 +78,16 @@ $loss = 0;
 
                 $deltadisplay = "<span>" . $delta . "</span>";
 
-                if ($delta >= 0) {
+                if ($delta > 0) {
                     $win += 1;
                     echo "<tr class='rival-pos smx-font'>";
                 } else {
-                    $loss += 1;
-                    echo "<tr class='rival-neg smx-font'>";
+                    if ($delta == 0) {
+                        echo "<tr class='smx-font'>";
+                    } else {
+                        $loss += 1;
+                        echo "<tr class='rival-neg smx-font'>";
+                    }
                 }
                 /*
                 echo "<tr>";
