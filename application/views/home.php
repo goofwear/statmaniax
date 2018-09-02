@@ -12,8 +12,8 @@
         updated every 30 minutes with information downloaded direct from StepManiaX.
     </div>
     <div class="update-note">
-        <p>StatManiaX v1.1 - Updated 1 Sep 2018 - Fixed mobile support, rankings added, added search by country, misc
-            changes</p>
+        <p><b>Please note:</b> Bassmonkey songs currently do not have score data. This is intentionally done by the
+            StepManiaX team and will be corrected shortly. Please do not contact the StepmaniaX team about this.</p>
     </div>
 
 </div>
