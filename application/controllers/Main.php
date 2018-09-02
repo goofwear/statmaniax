@@ -173,4 +173,14 @@ class Main extends CI_Controller {
         die(json_encode($this->db->get('user')->result_array()));
     }
 
+    public function generateRankings()
+    {
+        $diffs = Array('basic', 'easy', 'hard', 'wild', 'dual', 'full', 'wildfull');
+
+        foreach ($diffs as $diff) {
+            echo $diff;
+            $this->data->ranking_update($diff);
+            echo "<br>";
+        }
+    }
 }

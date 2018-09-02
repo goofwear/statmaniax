@@ -23,6 +23,8 @@
             </option>
             <option <?php if ($diff == "full"): ?> selected="selected" <?php endif; ?> value="full">Full
             </option>
+            <option <?php if ($diff == "wildfull"): ?> selected="selected" <?php endif; ?> value="wildfull">Wild + Full
+            </option>
         </select>
         mode.
     </p>

@@ -471,12 +471,31 @@ class Data extends CI_Model {
 		$userid = $this->db->escape($user['id']);
 		$diff_str = $this->db->escape($diff);
 
-		$sql = "SELECT gamer_id, basic, easy, hard, wild, `dual`, full, max(score) AS score from score
+        if (strpos($diff, "wildfull") !== false) {
+            $sql = "SELECT gamer_id, basic, easy, hard, wild, `dual`, full, max(score) AS score from score
+			inner join song 
+			on song.title = score.title and song.artist = score.artist
+			where name='wild' and gamer_id=$userid GROUP BY song_chart_id";
+            $query = $this->db->query($sql);
+            $wild = $query->result_array();
+
+
+            $sql = "SELECT gamer_id, basic, easy, hard, wild, `dual`, full, max(score) AS score from score
+			inner join song 
+			on song.title = score.title and song.artist = score.artist
+			where name='full' and gamer_id=$userid GROUP BY song_chart_id";
+            $query = $this->db->query($sql);
+            $full = $query->result_array();
+
+        } else {
+            $sql = "SELECT gamer_id, basic, easy, hard, wild, `dual`, full, max(score) AS score from score
 			inner join song 
 			on song.title = score.title and song.artist = score.artist
 			where name=$diff_str and gamer_id=$userid GROUP BY song_chart_id";
-		$query = $this->db->query($sql);
-		$scores = $query->result_array();
+            $query = $this->db->query($sql);
+            $scores = $query->result_array();
+
+        }
 	
 		echo "<pre>";
 
@@ -485,10 +504,22 @@ class Data extends CI_Model {
 		// Ranking Algorigm is simple right now, just take the level of the chart and multiple by the difficulty
 		// this makes it so the harder songs are weighted more. maybe this is too aggresive though. Only time will tell!
 
-		foreach($scores as $score ){
-			$diff = strtolower($diff);
-			$rank+= ($score[$diff]*($weight))*$score['score'];
-		}
+
+        if (strpos($diff, "wildfull") !== false) {
+            foreach ($wild as $score) {
+                $rank += ($score['wild'] * ($weight)) * $score['score'];
+            }
+
+            foreach ($full as $score) {
+                $rank += ($score['full'] * ($weight)) * $score['score'];
+            }
+        } else {
+            foreach ($scores as $score) {
+                $diff = strtolower($diff);
+                $rank += ($score[$diff] * ($weight)) * $score['score'];
+            }
+        }
+
 
 		$rank = $this->db->escape($rank);
 		$sql = "INSERT into ranking (`user_id`, `rank`, `name`) VALUES 

@@ -27,7 +27,7 @@ class Ranking extends CI_Controller {
 	
 	public function generateRankings() {
 
-		$diffs = Array('basic', 'easy', 'hard', 'wild', 'dual', 'full');
+        $diffs = Array('basic', 'easy', 'hard', 'wild', 'dual', 'full', 'wildfull');
 
 		foreach ($diffs as $diff){
 			echo $diff;
