@@ -496,8 +496,6 @@ class Data extends CI_Model {
             $scores = $query->result_array();
 
         }
-	
-		echo "<pre>";
 
 		$rank = 0;
 		$weight = 1;
