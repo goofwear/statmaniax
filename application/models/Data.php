@@ -7,6 +7,13 @@ class Data extends CI_Model {
 
     }
 
+
+    function get_news_db(){
+	$sql = "SELECT * from news order by date DESC";
+	return $this->db->query($sql)->result_array();
+
+    }
+
     function user_update($user_list){
 	foreach ($user_list as $user){
 
@@ -372,14 +379,19 @@ class Data extends CI_Model {
 	$title = $this->db->escape($song['title']);
 	$diff =  $this->db->escape($diff);
 
-	$sql = "SELECT * FROM score
-		INNER JOIN
-		(SELECT gamer_id, max(score) AS score FROM score WHERE title=$title AND artist=$artist AND name=$diff GROUP BY gamer_id) maxscore
-		ON (score.gamer_id = maxscore.gamer_id and score.score = maxscore.score)
-		INNER JOIN user
-		ON score.gamer_id = user.id
-		WHERE title=$title AND artist=$artist AND name=$diff
-		ORDER BY score.score DESC";
+	#$sql = "SELECT * FROM score
+	#	INNER JOIN
+	#	(SELECT gamer_id, max(score) AS score FROM score WHERE title=$title AND artist=$artist AND name=$diff GROUP BY gamer_id) maxscore
+	#	ON (score.gamer_id = maxscore.gamer_id and score.score = maxscore.score)
+	#	INNER JOIN user
+	#	ON score.gamer_id = user.id
+	#	WHERE title=$title AND artist=$artist AND name=$diff
+	#	ORDER BY score.score DESC";
+	$sql = "SELECT user.username, user.picture_path, `grade`, `perfect1`, `perfect2`, `early`, `late`, `misses`, `flags`, `green`, `yellow`, `red`, gamer_id, max(score) AS score, created_at FROM score 
+		INNER JOIN user ON
+		user.id = score.gamer_id
+		WHERE title=$title AND artist=$artist AND name=$diff GROUP BY gamer_id  
+		ORDER BY `score`  DESC";
 
 	$query = $this->db->query($sql);
 	return $query->result_array();
