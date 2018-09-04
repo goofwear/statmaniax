@@ -21,18 +21,17 @@ foreach ($user_stats as $stat):
 
 endforeach;
 
-foreach ($user_scores as $key => $score) {
 
-
-    $world = $world_scores[$key]['score'];
-    $score_points = $score['score'];
-    $delta = $world - $score_points;
-
-
-    if ($delta == 0) {
-        $wrs += 1;
-    }
-
+if(!isset($total_records)){
+	foreach ($user_scores as $key => $score) {
+		$world = $world_scores[$key]['score'];
+		$score_points = $score['score'];
+		$delta = $world - $score_points;
+		if ($delta == 0)
+			$wrs += 1;
+	}
+} else {
+	$wrs = $total_records;
 }
 ?>
 
@@ -66,7 +65,7 @@ foreach ($user_scores as $key => $score) {
             </div>
         </div>
         <div class="col-6 smx-font">
-            <p>Stats for <?= $diff ?>:</p>
+            <?php if(isset($diff)): ?><p>Stats for <?= $diff ?></p> <?php endif; ?>
             <h6 class="smx-font">Country: <?= $user_info['country'] ?></h6>
             <h6 class="smx-font">Total Score: <?= number_format($user_info['total_score']) ?></h6>
             <h6 class="smx-font">World Records: <?= $wrs ?></h6>
