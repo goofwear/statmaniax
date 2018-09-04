@@ -751,3 +751,14 @@ html {
 .footable-details {
     background: #1a1a1a !important;
 }
+
+.embed-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 250px;
+    border: 2px white solid;
+    background: black;
+    color: white;
+}

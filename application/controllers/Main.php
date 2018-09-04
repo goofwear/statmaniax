@@ -12,6 +12,19 @@ class Main extends CI_Controller {
 
 	}
 
+    public function embed($userid, $diff)
+    {
+        $data['diff'] = html_escape($diff);
+        $data['userid'] = $userid;
+        $diff = $this->data->diff_convert($diff);
+
+        $data['user_scores'] = $this->data->user_highscores_title_db($userid, $diff);
+        $data['user_stats'] = $this->data->user_stats_db($userid, $diff);
+        $data['user_info'] = $this->data->user_info_db($userid);
+        $data['world_scores'] = $this->data->leaderboard_title_db($diff);
+        $this->load->view('embed', $data);
+    }
+
 
 	public function index() {
 		$this->load->view('templates/header');

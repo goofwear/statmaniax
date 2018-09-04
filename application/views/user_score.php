@@ -27,6 +27,8 @@
 
                 <?php endforeach; ?>
             </table>
+            <hr>
+            <a class="btn btn-primary" href="<?= base_url('embed/' . $userid . '/' . $diff) ?>">Stream/Website Embed</a>
         </div>
     </div>
     <div class="col-md-10">
