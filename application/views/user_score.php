@@ -101,7 +101,7 @@
 
                     ?>
                     <tr class='smx-font'>
-                        <td class="truncate-playerui"><a style="color: white; text-decoration: underline"
+                        <td data-sort-value="<?=$score['title'] ?>" class="truncate-playerui"><a style="color: white; text-decoration: underline"
                                                          href="<?= base_url('song/' . $score['game_song_id'] . "/" . $score['name']) ?>"><?= $score['title'] ?></a>
                         </td>
                         <td class="truncate-playerui"><?= $score['artist'] ?></td>
