@@ -63,7 +63,7 @@
                 <th data-breakpoints="xs sm">Artist</th>
                 <th>Level</th>
                 <th data-type="number">Score</th>
-                <th data-type="number" data-breakpoints="xs sm">Delta</th>
+                <th data-type="number">Delta</th>
                 <th data-breakpoints="xs sm">Grade</th>
                 <th data-type="number" data-breakpoints="xs sm">WR</th>
                 <th data-type="date" data-breakpoints="xs sm">Date</th>

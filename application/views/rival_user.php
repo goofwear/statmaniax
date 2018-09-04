@@ -55,7 +55,7 @@ $loss = 0;
                 <th data-breakpoints="xs sm">Artist</th>
                 <th>Level</th>
                 <th data-type="number">Score</th>
-                <th data-type="number" data-breakpoints="xs sm">Delta</th>
+                <th data-type="number">Delta</th>
                 <th data-type="number" data-breakpoints="xs sm">Rival</th>
                 <th data-type="date" data-breakpoints="xs sm">Date</th>
             </thead>
