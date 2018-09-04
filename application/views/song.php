@@ -86,7 +86,7 @@
                         foreach ($scores as $score) { ?>
 
                             <tr>
-                                <td class="smx-font">
+                                <td data-sort-value="<?=$score['username'] ?>" class="smx-font">
                                     <img style="border-radius: 100px; margin-right: 20px;"
                                          src="https://data.stepmaniax.com/<?= $score['picture_path'] ?>"
                                          width="35px"> <a style="color: white; text-decoration: underline"
@@ -124,7 +124,7 @@ Perfect!!: <?= $score['perfect1'] ?><br/>Perfect!: <?= $score['perfect2'] ?>
                         foreach ($score_history as $score) { ?>
 
                             <tr>
-                                <td class="smx-font">
+                                <td data-sort-value="<?=$score['username'] ?>" class="smx-font">
                                     <img style="border-radius: 100px; margin-right: 20px;"
                                          src="https://data.stepmaniax.com/<?= $score['picture_path'] ?>"
                                          width="35px"> <a style="color: white; text-decoration: underline"
