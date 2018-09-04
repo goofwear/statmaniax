@@ -7,17 +7,19 @@
     <h2 id="smx-title">STATMANIAX</h2>
 </div>
 
-<div class="container" style="margin-top: 5vh">
-    <div class="alert alert-danger smx-font"><b>This is unofficial!</b> StatManiaX is an unofficial UI for StepManiaX,
-        updated every 30 minutes with information downloaded direct from StepManiaX.
+<a href="<?= base_url('news') ?>" class="news-button">
+    <p>NEWS</p>
+</a>
+
+<div class="container">
+    <div class="warning">
+        <p>Please Note: This is an unofficial score tracker for StepManiaX.</p>
+        <p>Scores are not updated immediately; data is downloaded every 30 minutes.</p>
     </div>
-<?php foreach($news as $message): ?>
-    <div class="update-note">
-	<p><?=$message['text'] ?></p>
-    </div><br>
-<?php endforeach; ?>
 </div>
+
 <div class="container-fluid container-home">
+
 
     <div class="row">
         <div class="col-md-3">
