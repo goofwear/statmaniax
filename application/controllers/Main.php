@@ -14,8 +14,9 @@ class Main extends CI_Controller {
 
 
 	public function index() {
+		$data['news'] = $this->data->get_news_db();
 		$this->load->view('templates/header');
-		$this->load->view('home');
+		$this->load->view('home', $data);
 		$this->load->view('templates/footer');
 	}
 

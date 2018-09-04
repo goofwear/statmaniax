@@ -7,6 +7,13 @@ class Data extends CI_Model {
 
     }
 
+
+    function get_news_db(){
+	$sql = "SELECT * from news order by date DESC";
+	return $this->db->query($sql)->result_array();
+
+    }
+
     function user_update($user_list){
 	foreach ($user_list as $user){
 

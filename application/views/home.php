@@ -11,11 +11,11 @@
     <div class="alert alert-danger smx-font"><b>This is unofficial!</b> StatManiaX is an unofficial UI for StepManiaX,
         updated every 30 minutes with information downloaded direct from StepManiaX.
     </div>
+<?php foreach($news as $message): ?>
     <div class="update-note">
-        <p><b>Please note:</b> Bassmonkey songs currently do not have score data. This is intentionally done by the
-            StepManiaX team and will be corrected shortly. Please do not contact the StepmaniaX team about this.</p>
-    </div>
-
+	<p><?=$message['text'] ?></p>
+    </div><br>
+<?php endforeach; ?>
 </div>
 <div class="container-fluid container-home">
 
