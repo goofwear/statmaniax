@@ -12,7 +12,7 @@
 
     <div class="row">
         <?php foreach ($songs as $song): ?>
-            <div class="col-md-2">
+            <div class="col-6 col-sm-4 col-md-4 col-xl-2">
                 <div class="song" style="cursor: pointer;" onclick="window.location='<?=base_url('song/' . $song['game_song_id'])?>';">
                     <img src="https://data.stepmaniax.com/<?= $song['cover_path'] ?>/cover.png" width="100%">
                     <h4 class="truncate smx-font"><?= $song['title'] ?></h4>

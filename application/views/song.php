@@ -8,7 +8,7 @@
 </div>
  <div class="container-fluid">
     <div class="row">
-        <div class="col-md-3 smx-cover-pers">
+        <div class="col-lg-3 col-md-5 smx-cover-pers">
             <img class="smx-cover" src="https://data.stepmaniax.com/<?= $song['cover_path'] ?>/cover.png" width="100%">
             <div style="padding-top: 25px"></div>
             <h1 class="smx-font"><?= $song['title'] ?></h1>
@@ -36,7 +36,7 @@
                 </tbody>
             </table>
          </div>
-        <div class="col-md-9">
+        <div class="col-lg-9 col-md-7">
             <div class="alert alert-info alert-dismissible fade show" role="alert">
                 <strong>Tip:</strong> Hover over your score to view detailed judgement information.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
