@@ -48,12 +48,14 @@ class Update extends CI_Controller {
                 $this->update_users();
 		$this->update_leaderboard();
 		$this->update_songs();
-        $this->update_rankings();
 		
 		$userlist = $this->data->user_list_db();
 		foreach ($userlist as $user){
 			$this->update_scores($user['id']);
 		};
+
+		$this->update_rankings();
+
 	}
 
     public function update_rankings()
