@@ -12,18 +12,23 @@ class Main extends CI_Controller {
 
 	}
 
-    public function embed($userid, $diff)
-    {
-        $data['diff'] = html_escape($diff);
-        $data['userid'] = $userid;
-        $diff = $this->data->diff_convert($diff);
+	public function embed($userid, $diff=Null){
+		$data['diff'] = html_escape($diff);
+		$data['userid'] = $userid;
+		$data['user_info'] = $this->data->user_info_db($userid);
 
-        $data['user_scores'] = $this->data->user_highscores_title_db($userid, $diff);
-        $data['user_stats'] = $this->data->user_stats_db($userid, $diff);
-        $data['user_info'] = $this->data->user_info_db($userid);
-        $data['world_scores'] = $this->data->leaderboard_title_db($diff);
-        $this->load->view('embed', $data);
-    }
+		if(isset($diff)){
+			$data['diff'] = html_escape($diff);
+			$diff = $this->data->diff_convert($diff);
+			$data['user_scores'] = $this->data->user_highscores_title_db($userid, $diff);
+			$data['user_stats'] = $this->data->user_stars_unique_db($userid, $diff);
+			$data['world_scores'] = $this->data->leaderboard_title_db($diff);
+		} else {
+			$data['user_stats'] = $this->data->user_stars_unique_db($userid);
+			$data['total_records'] = $this->data->user_world_records($userid);
+		}
+		$this->load->view('embed', $data);
+	}
 
 
 	public function index() {

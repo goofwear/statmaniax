@@ -122,6 +122,64 @@ class Data extends CI_Model {
 
     }
 
+    function user_stars_unique_db($userid, $diff=Null){
+	$userid = $this->db->escape($userid);
+	if(isset($diff)) {
+		if(is_numeric($diff))
+			$diff = $this->diff_convert($diff);
+		$diff = $this->db->escape($diff);
+		$sql =  "select grade, count(*) as count from (select title, artist, grade, name, count(*) as count FROM `score`
+                        WHERE gamer_id=$userid and name=$diff  group by grade, title, artist, name) results
+                        group by grade";
+	} 	else {
+		$sql = "select grade, count(*) as count from (select title, artist, grade, name, count(*) as count FROM `score`
+			WHERE gamer_id=$userid group by grade, title, artist, name) results
+			group by grade";
+	}
+	$query = $this->db->query($sql);
+	return $query->result_array();
+
+    }
+
+    function user_world_records($userid){
+	$userid = $this->db->escape($userid);
+
+	$sql = "select title, artist, name, score from score where gamer_id=$userid";
+	$query = $this->db->query($sql);
+	$highscores = $query->result_array();
+
+	$sql = "select * from leaderboard";
+	$query = $this->db->query($sql);
+        $world = $query->result_array();
+
+	$leaderboard = Array();
+	foreach ($world as $score)
+		$leaderboard[$score['id'].$score['diff']] = $score;
+
+	$user_scores = Array();
+        foreach($highscores as $score){
+		$title = $score['title'];
+		$artist = $score['artist'];
+		$diff = $this->diff_convert($score['name']);
+		if (isset($user_scores[$title.$artist.$diff])){
+			if($user_scores[$title.$artist.$diff]['score'] < $score['score'])
+				$user_scores[$title.$artist.$diff] = $score;
+		} else {
+			$user_scores[$title.$artist.$diff] = $score;
+		}
+	}
+
+	$wr=0;
+	foreach($user_scores as $score){
+		$diff = $this->diff_convert($score['name']);
+		if($leaderboard[$score['title'].$score['artist'].$diff]['score'] <= $score['score'])
+			$wr+=1;
+
+	}
+	return $wr;
+
+    }
+
     function song_info_db($songid){
 	$query = $this->db->get_where('song', array('game_song_id' => $songid));
 	return $query->row_array();

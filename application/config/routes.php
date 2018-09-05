@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'main';
 $route['player/(:num)'] = 'main/scores/$1';
 $route['player/(:num)/(:any)'] = 'main/scores/$1/$2';
+$route['embed/(:num)'] = 'main/embed/$1';
 $route['embed/(:num)/(:any)'] = 'main/embed/$1/$2';
 $route['player/(:num)/compare/(:any)/(:any)'] = 'main/rival/$1/$2/$3';
 $route['song/(:num)'] = 'main/song/$1';
