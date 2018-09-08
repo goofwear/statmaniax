@@ -10,6 +10,18 @@
 
 <div class="container-fluid" style="margin-bottom: 5%">
 
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <input class="form-control" placeholder="Search for songs (or leave empty to see all)"
+                       name="query" <?php if (isset($query)): ?> value="<?= $query ?>" <?php endif; ?>>
+            </div>
+            <div class="col-md-1">
+                <button type="button" name="search" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
     <div class="row">
         <?php foreach ($songs as $song): ?>
             <div class="col-6 col-sm-4 col-md-4 col-xl-2">

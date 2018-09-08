@@ -90,9 +90,13 @@ class Data extends CI_Model {
     }
 
 
-    function song_list_db(){
-	$sql = "SELECT * from song";
-        $query = $this->db->query($sql);
+    function song_list_db($query = null)
+    {
+        if ($query != null) {
+            $this->db->like('title', $query);
+
+        }
+        $query = $this->db->get('song');
         return $query->result_array();
     }
 

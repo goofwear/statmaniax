@@ -57,7 +57,14 @@ class Main extends CI_Controller {
 
 	public function songs(){
 
-		$data['songs'] = $this->data->song_list_db();
+
+        if (isset($_POST['query']) && !empty($_POST['query'])) {
+            $data['songs'] = $this->data->song_list_db($_POST['query']);
+            $data['query'] = $_POST['query'];
+        } else {
+            $data['songs'] = $this->data->song_list_db();
+        }
+
 		$this->load->view('templates/header');
 		$this->load->view('song_list', $data);
 		$this->load->view('templates/footer');
