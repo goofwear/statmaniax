@@ -30,6 +30,7 @@
                     <h4 class="truncate smx-font"><?= $song['title'] ?></h4>
                     <h6 class="truncate"><?= $song['artist'] ?></h6>
                     <h6><?php if(isset($song['genre'])) echo $song['genre']; else; echo "</br>"; ?></h6>
+		    <h6><?php if(isset($song['count'])) echo "(".$song['count'].") Plays"; ?></h6>
                     <hr>
                     <h5><?= $song['bpm'] ?> BPM</h5>
                     <h6 class="truncate"><a href="https://<?= $song['website'] ?>"><small><?= $song['website'] ?></small></a> </h6>

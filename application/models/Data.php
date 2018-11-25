@@ -752,4 +752,17 @@ class Data extends CI_Model {
         $this->db->join('user', 'user.id = ranking.user_id');
         return $this->db->get('ranking')->result_array();
     }
+
+    function most_played_songs(){
+	$sql = "SELECT count(*) as count, score.title, score.artist, score.cover_path, song.website, song.game_song_id, song.genre, song.label, song.bpm FROM `score` 
+		inner join song on 
+		song.artist = score.artist 
+		and
+		song.title = score.title
+		group by `title`,`artist`
+		order by count desc";
+	$query = $this->db->query($sql);
+	return $query->result_array();
+    }
+
 }

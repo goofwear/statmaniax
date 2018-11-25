@@ -60,6 +60,7 @@ $route['song/(:num)/(:any)'] = 'main/song/$1/$2';
 $route['ranking'] = 'ranking/index/wild';
 $route['ranking/(:any)'] = 'ranking/index/$1';
 $route['songs'] = 'main/songs';
+$route['songs/(:any)'] = 'main/songs/$1';
 $route['news'] = 'main/news';
 $route['players'] = 'main/users';
 $route['search'] = 'main/search';
