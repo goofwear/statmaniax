@@ -82,7 +82,7 @@ class Api_model extends CI_Model {
     	$this->db->where('score.id', $id);
         $this->db->join('song', 'on song.id = score.song_id');
 	$this->db->join('user', 'on user.id = score.gamer_id');
-	$this->db->orderby('timestamp', 'DESC');
+	$this->db->orderby('timestamp', 'desc');
         $query = $this->db->get('score');
         return $query->result_array();
 
@@ -113,7 +113,9 @@ class Api_model extends CI_Model {
 
 
     function song_scorehistory($id, $diff, $first, $last){
+	$this->db->order_by('date', 'desc');
 	$this->db->where('song.id', $id);
+	$this->db->where('score.name', $diff);
 	$this->db->join('song', 'on song.id = score.song_id');
 	$this->db->join('user', 'on user.id = score.gamer_id');
         $this->db->limit($last,$first);
