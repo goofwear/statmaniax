@@ -282,6 +282,7 @@ class Data extends CI_Model {
 
 
 		$id = $this->db->escape($score['id']);
+                $song_id = $this->db->escape($this->get_song_id_by_text($score['title'], $score['artist']));
                 $gamer_id = $this->db->escape($score['gamer_id']);
                 $song_chart_id = $this->db->escape($score['song_chart_id']);
                 $score_points = $this->db->escape($score['score']);
@@ -304,9 +305,9 @@ class Data extends CI_Model {
                 $name = $this->db->escape($score['name']);
                 $uuid = $this->db->escape($score['uuid']);
 
-		$sql = "INSERT into score (id,gamer_id,song_chart_id,score,machine_serial,grade,calories,perfect1,perfect2,early,late,misses,flags,green,yellow,red,created_at,title,artist,cover_path,name,uuid)
-			VALUES($id,$gamer_id,$song_chart_id,$score_points,$machine_serial,$grade,$calories,$perfect1,$perfect2,$early,$late,$misses,$flags,$green,$yellow,$red,$created_at,$title,$artist,$cover_path,$name,$uuid)
-			ON DUPLICATE KEY UPDATE artist=$artist,title=$title,created_at=$created_at";
+		$sql = "INSERT into score (id,song_id,gamer_id,song_chart_id,score,machine_serial,grade,calories,perfect1,perfect2,early,late,misses,flags,green,yellow,red,created_at,title,artist,cover_path,name,uuid)
+			VALUES($id,$song_id,$gamer_id,$song_chart_id,$score_points,$machine_serial,$grade,$calories,$perfect1,$perfect2,$early,$late,$misses,$flags,$green,$yellow,$red,$created_at,$title,$artist,$cover_path,$name,$uuid)
+			ON DUPLICATE KEY UPDATE song_id=$song_id,artist=$artist,title=$title,created_at=$created_at";
 		$this->db->query($sql);
 	}
 
@@ -322,11 +323,15 @@ class Data extends CI_Model {
         $num_pages = $json['scores']['last_page'];
         $current_page = $json['scores']['current_page'];
 
-
         $score_list = $json['scores']['data'];
 	$highscores = Array();
         while($current_page <= $num_pages){
 		foreach($score_list as $score) {
+
+			$score['song_id'] = $this->get_song_id_by_text($score['title'], $score['artist']);
+
+			print_r($score);
+			exit();
 			$song_chart_id = $score['song_chart_id'];
 			if(isset($highscores[$song_chart_id])){
 				if($highscores[$song_chart_id]['score'] < $score['score'])
@@ -414,12 +419,13 @@ class Data extends CI_Model {
 	return $highscores;
     }
 
-    function get_song_id_by_title($title)
+    function get_song_id_by_text($title, $artist)
     {
-        $this->db->select('game_song_id');
+        $this->db->select('id');
         $this->db->where('title', $title);
+	$this->db->where('artist', $artist);
         $out = $this->db->get('song')->result_array()[0];
-        return $out['game_song_id'];
+        return $out['id'];
     }
 
     function song_score_history_db($song, $diff = 4) {

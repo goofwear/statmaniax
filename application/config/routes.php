@@ -64,5 +64,21 @@ $route['songs/(:any)'] = 'main/songs/$1';
 $route['news'] = 'main/news';
 $route['players'] = 'main/users';
 $route['search'] = 'main/search';
+
+#api
+$route['api/users(:num)/limit/(:num)/(:num)'] = 'api/users/limit/$1/$2';
+$route['api/users/(:num)/scores/diff/(:any)'] = 'api/user_scores/$1/$2';
+$route['api/users/(:num)/scores/diff/(:any)/limit/(:num)/(:num)'] = 'api/user_scores/$1/$2/$3/$4';
+$route['api/highscores/songs/diff/(:any)'] = 'api/highscores/$1';
+$route['api/highscores/songs/(:num)'] = 'api/song_highscores/$1';
+$route['api/highscores/users/(:num)']  = 'api/user_highscores_all/$1';
+$route['api/highscores/users/(:num)/diff/(:any)'] = 'api/user_highscores/$1/$2';
+$route['api/scores/songs/(:num)/diff/(:any)'] = 'api/song_scorehistory/$1/$2';
+$route['api/scores/songs/(:num)/diff/(:any)/limit/(:num)/(:num)'] = 'api/song_scorehistory/$1/$2/$3/$4';
+$route['api/score/(:num)'] = 'api/score/$1';
+
+$route['api/rank/diff/(:any)'] = 'api/rank/$1';
+$route['api/rank/diff/(:any)/limit/(:num)/(:num)'] = 'api/rank/$1/$2/$3';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
