@@ -67,7 +67,9 @@ $route['search'] = 'main/search';
 
 #api
 $route['api/users(:num)/limit/(:num)/(:num)'] = 'api/users/limit/$1/$2';
-$route['api/users/(:num)/scores/diff/(:any)'] = 'api/user_scores/$1/$2';
+$route['api/users/(:num)/scores'] = 'api/user_score_history/$1';
+$route['api/users/(:num)/scores/limit/(:num)/(:num)'] = 'api/user_score_history/$1/$2/$3';
+$route['api/users/(:num)/scores/diff/(:any)'] = 'api/users_scores/$1/$2';
 $route['api/users/(:num)/scores/diff/(:any)/limit/(:num)/(:num)'] = 'api/user_scores/$1/$2/$3/$4';
 $route['api/highscores/songs/diff/(:any)'] = 'api/highscores/$1';
 $route['api/highscores/songs/(:num)'] = 'api/song_highscores/$1';
