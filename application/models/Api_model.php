@@ -9,13 +9,42 @@ class Api_model extends CI_Model {
 
     function user_list($id, $first, $last){
 
-	if(is_numeric($id))
+	if(is_numeric($id)) {
+        $this->db->order_by('total_score', 'DESC');
+        $this->db->select("id, total_score");
+        $results = $this->db->get('user')->result_array();
+
+        $i = 0;
+        foreach($results as $user){
+            $i++;
+            if($user['id'] == $id)
+                break;
+        }
 		$this->db->where('id', $id);
-	else
+    } else
 		$this->db->order_by('username', 'asc');
 	$this->db->limit($last,$first);
-	$query = $this->db->get('user');
-	return $query->result_array();
+	$query = $this->db->get('user')->result_array();
+
+    if(is_numeric($id)) {
+        $query[0]['exp_rank'] = $i;
+
+
+        $this->db->order_by('total_score', 'DESC');
+        $this->db->select("id, total_score");
+        $this->db->where('country', $query[0]['country']);
+        $results = $this->db->get('user')->result_array();
+
+        $i = 0;
+        foreach($results as $user){
+            $i++;
+            if($user['id'] == $id)
+                break;
+        }
+        $query[0]['exp_rank_region'] = $i;
+    }
+
+	return $query;
 
     }
 
@@ -33,12 +62,12 @@ class Api_model extends CI_Model {
 
 
     function user_rank($diff, $first, $last){
-	$this->db->where('name', $diff);
-	$this->db->join('user', 'on user.id = ranking.user_id');
-	$this->db->order_by('rank', 'desc');
-	$this->db->limit($last,$first);
-	$query = $this->db->get('ranking');
-	return $query->result_array();
+		$this->db->where('name', $diff);
+		$this->db->join('user', 'on user.id = ranking.user_id');
+		$this->db->order_by('rank', 'desc');
+		$this->db->limit($last,$first);
+		$query = $this->db->get('ranking');
+		return $query->result_array();
     }
 
     function user_scores($userid, $diff, $first, $last){
@@ -61,8 +90,22 @@ class Api_model extends CI_Model {
     }
 
     function user_info($userid){
-	$this->db->where('id', $userid);
-	return ($this->db->get('user')->result_array()[0]);
+        $this->db->order_by('total_score', 'DESC');
+        $this->db->select("id, total_score");
+        $results = $this->db->get('user')->result_array();
+
+        $i = 0;
+        foreach($results as $user){
+            $i++;
+            if($results['user'] == $userid)
+                break;
+        }
+
+	    $this->db->where('id', $userid);
+        $user = $this->db->get('user')->result_array()[0];
+        echo  "<pre>";
+        print_r($user);
+        exit();
     }
 
     function user_highscores_all($userid, $diff){
@@ -459,7 +502,7 @@ class Api_model extends CI_Model {
 		$this->db->group_by('title, artist');
 		//$this->db->join('user as u', 'gamer_id = u.id');
 		$this->db->join('song as s', 's.id = score.song_id');
-		$this->db->select('s.game_song_id, gamer_id, max(score) as score, score.title, score.artist, score.name, s.cover_path');
+		$this->db->select('s.id as id, s.game_song_id, gamer_id, score.id as score_id, score.grade, max(score) as score, score.title, s.subtitle, score.artist, score.name, s.cover_path');
 		$high_scores = $this->db->get('score')->result_array();
 
 		$song_list = $this->song_list();
@@ -479,17 +522,23 @@ class Api_model extends CI_Model {
 			if(array_key_exists($key, $scores))
 				$high_score_list[$key] = $scores[$key];
 			else {
+				$high_score_list[$key]['id'] = $song['id'];
 				$high_score_list[$key]['score'] = 0;
+				$high_score_list[$key]['score_id'] = 0;
+				$high_score_list[$key]['grade'] = -1;
 				$high_score_list[$key]['gamer_id'] = $user;
-				$high_score_list[$key]['gamer_song_id'] = $key;
+				$high_score_list[$key]['game_song_id'] = $key;
 				$high_score_list[$key]['name'] = $diff;
+				$high_score_list[$key]['title'] = $song['title'];
+				$high_score_list[$key]['subtitle'] = $song['subtitle'];
 				$high_score_list[$key]['artist'] = $song['title'];
-				$high_score_list[$key]['title'] = $song['artist'];
 				$high_score_list[$key]['cover_path'] = $song['cover_path'];
 
 			}
 		}
 
+		// convert json objects into an array (remove the keys)
+		$high_score_list = array_values($high_score_list);
 		return $high_score_list;
 
 	}
@@ -503,7 +552,7 @@ class Api_model extends CI_Model {
     	$this->db->join('user as u', 'u.id = s.gamer_id');
     	$this->db->join('song as s1', 's1.title = s.title');
     	$this->db->join('song as s2', 's2.artist = s.artist');
-    	$this->db->select("score, s.title, s.artist, gamer_id, u.username, u.picture_path, u.country,
+    	$this->db->select("s1.id as id, score, s.id as score_id, s.grade, s.title, s1.subtitle, s.artist, gamer_id, u.username, u.picture_path, u.country,
     						s1.game_song_id, created_at, s.cover_path");
 		$all_scores = $this->db->get("score as s")->result_array();
 
@@ -529,16 +578,26 @@ class Api_model extends CI_Model {
 		// for songs not played, set score to 0
 		foreach($songs as $key=>$song){
 			if(!array_key_exists($key, $high_score_list)) {
+				$high_score_list[$key]['id'] = $song['id'];
 				$high_score_list[$key]['score'] = 0;
+				$high_score_list[$key]['score_id'] = 0;
+				$high_score_list[$key]['grade'] = -1;
 				$high_score_list[$key]['gamer_id'] = 0;
-				$high_score_list[$key]['gamer_song_id'] = $key;
+				$high_score_list[$key]['game_song_id'] = $key;
 				$high_score_list[$key]['name'] = $diff;
 				$high_score_list[$key]['artist'] = $song['title'];
+				$high_score_list[$key]['subtitle'] = $song['subtitle'];
 				$high_score_list[$key]['title'] = $song['artist'];
+				$high_score_list[$key]['subtitle'] = $song['subtitle'];
 				$high_score_list[$key]['cover_path'] = $song['cover_path'];
 				$high_score_list[$key]['country'] = $region;
 			}
 		}
+
+		// convert json objects into an array (remove the keys)
+		$high_score_list = array_values($high_score_list);
+		return $high_score_list;
+
 		return $high_score_list;
 	}
 

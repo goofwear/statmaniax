@@ -17,7 +17,7 @@ class Data extends CI_Model {
     function user_update($user_list){
 	foreach ($user_list as $user){
 
-		if(isset($user['picture_path'])){
+		if(strpos($user['picture_path'], "avatar")){
 
 			$id = $this->db->escape($this->parse_picture_path($user['picture_path']));
 			$first = $this->db->escape($user['first_name']);
@@ -239,7 +239,7 @@ class Data extends CI_Model {
         $user_list = $json['results']['data'];
         while($current_page < $num_pages){
 		foreach ($user_list as $user){
-			if (isset($user['picture_path'])){
+			if (strpos($user['picture_path'], "avatar")){
 				$id = $this->parse_picture_path($user['picture_path']);
 				if ($userid == $id){
 					return $user;
@@ -423,7 +423,7 @@ class Data extends CI_Model {
     {
         $this->db->select('id');
         $this->db->where('title', $title);
-	$this->db->where('artist', $artist);
+	    $this->db->where('artist', $artist);
         $out = $this->db->get('song')->result_array()[0];
         return $out['id'];
     }
@@ -537,8 +537,8 @@ class Data extends CI_Model {
 		$highscores = $this->leaderboard_title_api($diff);
 
 		foreach($highscores as $key=>$score){
-                    if(isset($score['picture_path']))
-			$userid = $this->db->escape($this->parse_picture_path($score['picture_path']));
+            if(strpos($score['picture_path'],'avatar'))
+			    $userid = $this->db->escape($this->parse_picture_path($score['picture_path']));
 		    else
 			$userid = NULL;
 

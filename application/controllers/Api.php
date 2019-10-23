@@ -17,7 +17,7 @@ class Api extends CI_Controller {
 	}
 
 
-	public function get_user_highscore($userid, $diff='wild'){
+	public function get_user_highscores($userid, $diff='wild'){
 		$data['scores'] = $this->api_model->getUserHighScores($userid, $diff);
 		echo json_encode($data, JSON_PRETTY_PRINT);
 	}
