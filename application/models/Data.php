@@ -36,6 +36,61 @@ class Data extends CI_Model {
     }
 
 
+
+	function update_song_info($song_id){
+
+		$url = "https://data.stepmaniax.com/song/".$song_id."/view";
+
+
+		$options = array(
+			'http' => array(
+			'header'  => "Content-type: application/x-www-form-urlencoded\r\nauth-gamer: 3\r\n",
+			'method'  => 'POST',
+			)
+		);
+
+		$context  = stream_context_create($options);
+		$result = file_get_contents($url, false, $context);
+		if ($result === FALSE) { return; }
+
+		$song = json_decode(json_decode($result)->song, true);
+
+		$diff = Array();
+		foreach($song['charts'] as $chart){
+			$diff[$chart['difficulty_name']] = $chart['difficulty'];
+		}
+
+		if(array_key_exists('basic', $diff)) $basic = $diff['basic']; else $basic=0;
+		if(array_key_exists('easy', $diff)) $easy = $diff['easy']; else $easy=0;
+		if(array_key_exists('hard', $diff)) $hard = $diff['hard']; else $hard=0;
+		if(array_key_exists('wild', $diff)) $wild = $diff['wild']; else $wild=0;
+		if(array_key_exists('dual', $diff)) $dual = $diff['dual']; else $dual=0;
+		if(array_key_exists('full', $diff)) $full = $diff['full']; else $full=0;
+		if(array_key_exists('team', $diff)) $team = $diff['team']; else $team=0;
+
+		$data = array(
+			'title' => $song['title'],
+			'subtitle' => $song['subtitle'],
+			'artist' => $song['artist'],
+			'genre' => $song['genre'],
+			'label' => $song['label'],
+			'bpm' => $song['bpm'],
+			'cover_path' => substr($song['cover_path'], 0, -10),
+			'website' => $song['website'],
+			'basic' => $basic,
+			'easy' => $easy,
+			'hard' => $hard,
+			'wild' => $wild,
+			'dual' => $dual,
+			'full' => $full,
+			'team' => $team
+		);
+
+		$this->db->where('id', $song_id);
+		$this->db->update('song', $data);
+
+	}
+
     function song_list_generate(){
 
         $data = file_get_contents('https://data.stepmaniax.com/index.php/web/leaderboard/song?difficulty_id=1');
